@@ -1,0 +1,18 @@
+.review{
+  border: 1px solid pink;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width:400px;
+}
+.product_review{
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.product_review img{
+  width: 80px;
+  aspect-ratio: 1/1;
+}
+.price_review{
+  justify-self: flex-end;
+}

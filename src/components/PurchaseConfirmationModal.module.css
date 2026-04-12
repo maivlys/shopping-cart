@@ -1,0 +1,75 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+
+}
+.modal{
+  background-color: rgb(255, 255, 255);
+  width: clamp(200px, 60vw, 420px);
+  height: 200px;
+  border: none;
+  border-radius: 100px 0 100px 0;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.main_text{
+  color: #E49FC5;
+  font-size: 2.1rem;
+}
+
+.secondary_text{
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 0.7rem;
+}
+
+.close_button{
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+  background-color: transparent;
+  border: none;
+  color: #E49FC5;
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 4px;
+  transition: all 0.3s ease;
+}
+
+.close_button:hover{
+ background-color: rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+}
+
+.loading{
+  --d:22px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  color: #E49FC5;
+  box-shadow:
+    calc(1*var(--d))      calc(0*var(--d))     0 0,
+    calc(0.707*var(--d))  calc(0.707*var(--d)) 0 1px,
+    calc(0*var(--d))      calc(1*var(--d))     0 2px,
+    calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+    calc(-1*var(--d))     calc(0*var(--d))     0 4px,
+    calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+    calc(0*var(--d))      calc(-1*var(--d))    0 6px;
+  animation: l27 1s infinite steps(8);
+}
+@keyframes l27 {
+  100% {transform: rotate(1turn)}
+}

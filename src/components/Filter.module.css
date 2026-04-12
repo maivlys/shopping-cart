@@ -1,0 +1,123 @@
+.filter{
+  flex-shrink: 0;
+  width: 250px;
+  height: 380px;
+  border-radius: 8px;
+  background-color: #F0F0F0;
+  color: var(--grey);
+}
+.container{
+  display: grid;
+  grid-template-rows: 0.6fr 1fr 1fr 0.5fr;
+  gap: 1rem;
+  padding: 16px;
+}
+.banner{
+  height: 30px;
+  background-image: linear-gradient(90deg, #6A5EA0, #DA99C2);
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+}
+.title{
+  font-weight:500;
+  font-size: 1.1rem;
+}
+.filter_price,
+.filter_color,
+.product_type{
+  display: flex;
+  flex-direction: column;
+}
+.wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.filter_price{
+  display: flex;
+  gap: 0.5rem;
+
+}
+.input{
+  display: inline;
+  width: 80px;
+  border: none;
+  outline: none;
+  padding: 8px;
+  color: var(--grey);
+}
+.filter_color{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+.filter_color_btn{
+  opacity: 0.8;
+  border: none;
+  width: 30px;
+  aspect-ratio: 1/1;
+  flex-shrink: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.filter_color_btn:hover{
+  opacity: 1;
+}
+.white_btn.color_check{
+  stroke: var(--grey);
+}
+.color_check{
+  display: none;
+  width: 20px;
+  aspect-ratio: 1/1;
+  stroke-width: 1.5;
+  stroke: white
+}
+.filter_color_btn.active .color_check{
+  display: block;
+}
+.product_type{
+  display: flex;
+  gap: 0.5rem;
+}
+.filter_type_btn{
+  border: none;
+  background-color: #6A5EA0;
+  padding: 6px 8px;
+  border-radius: 4px;
+  opacity: 0.7;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  color: aliceblue;
+  font-size: 0.8rem;
+}
+.filter_type_btn:hover{
+  opacity: 1;
+}
+.active{
+  opacity: 1;
+  transform: scale(1.05);
+}
+.cancel_button{
+  color: var(--grey);
+  border: none;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+.cancel_button:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.cancel_button:active{
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.cancel_button_cnt{
+  justify-self: end;
+
+}

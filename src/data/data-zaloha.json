@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "name": "jew1",
+    "description": "description description description",
+    "price": 10.23942395,
+    "imgUrl": ["/products/id-1/1.png","/products/id-1/2.png","/products/id-1/3.png","/products/id-1/4.png"],
+    "color": ["white", "yellow"],
+    "type": ["bracelet"],
+    "colorOptions":["white", "gold"],
+    "colorSelected":"white",
+    "material":"elastic",
+    "length":"cca 45 cm" {"option":"white", "id": 1}, {"option":"gold", "id": 2}
+  },
+  {
+    "id": 2,
+    "name": "jew2",
+    "description": "description description description",
+    "price": 10.23942395,
+    "imgUrl": ["/products/id-1/1.png","/products/id-1/2.png","/products/id-1/3.png","/products/id-1/4.png"],
+    "color": ["white", "yellow"],
+    "type": ["bracelet"],
+    "colorOptions":["white", "gold"],
+    "colorSelected":"gold",
+    "material":"elastic",
+    "length":"cca 45 cm"
+  },
+  {
+    "id": 3,
+    "name": "jew3",
+    "description": "description description description",
+    "price": 11.99,
+    "imgUrl": ["/products/id-3/1.png","/products/id-3/2.png","/products/id-3/3.png"],
+    "color": ["white", "yellow"],
+    "type": ["necklace"],
+    "colorOptions":["gold"],
+    "colorSelected":"",
+    "material":"metalic",
+    "length":"45-50 cm"
+  },
+  {
+    "id": 4,
+    "name": "jew4",
+    "description": "description description description",
+    "price": 1.05,
+    "imgUrl": ["/products/id-4/1.png","/products/id-4/2.png","/products/id-4/3.png","/products/id-4/4.png"],
+    "color": ["green","pink","purple","blue","yellow"],
+    "type": ["earrings"],
+    "colorOptions":["mix"],
+    "colorSelected":"",
+    "material":"elastic",
+    "length":"cca 45 cm"
+  },
+  {
+    "id": 5,
+    "name": "jew5",
+    "description": "description description description",
+    "price": 14000,
+    "imgUrl": ["/products/id-5/1.png","/products/id-5/2.png","/products/id-5/3.png","/products/id-5/4.png"],
+    "color": ["white"],
+    "type": ["ring"],
+    "colorOptions":["white"],
+    "colorSelected":"",
+    "material":"elastic",
+    "length":"cca 45 cm"
+  }
+]

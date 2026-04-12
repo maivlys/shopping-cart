@@ -1,0 +1,14 @@
+.container{
+  background-color: antiquewhite;
+  color: black;
+  padding: 12px;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+}
+ul{
+  display: flex;
+  gap: 12px;
+  list-style-type: none;
+}

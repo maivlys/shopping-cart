@@ -1,0 +1,21 @@
+.container{
+  border: 1px solid yellow;
+  width: clamp(400px, 80%, 1000px);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.terms_error{
+  color: red;
+  font-weight: bold;
+}
+.input{
+  outline: none;
+}
+.empty{
+  border: 2px solid red;
+}
+/* .empty{
+  border: 2px solid red;
+  background-color: red;
+} */
