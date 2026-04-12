@@ -20,6 +20,7 @@ type ShoppingCartContext = {
   isFav: (id: number) => boolean;
   addToFavs: (id: number) => void;
   removeFromFavs: (id: number) => void;
+  freeDeliveryPrice: number;
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -48,6 +49,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     "shopping-cart",
     [],
   );
+
+  const freeDeliveryPrice = 49;
 
   useEffect(() => {
     console.log(cartItems);
@@ -140,6 +143,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         isFav,
         addToFavs,
         removeFromFavs,
+        freeDeliveryPrice,
       }}
     >
       {children}
