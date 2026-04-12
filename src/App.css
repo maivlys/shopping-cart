@@ -1,6 +1,13 @@
+@font-face {
+  font-family: "Bumerang";
+  src: url("/src/assets/fonts/Bumerang-Regular.ttf") format("truetype");
+  /* font-weight: 400; */
+  /* font-style: normal; */
+  /* font-display: swap; */
+}
 *{
   margin: 0;
-  padding: auto;
+  padding: 0;
   box-sizing: border-box;
 }
 body{
@@ -10,5 +17,7 @@ body{
 :root{
   --grey: rgba(0, 0, 0, 0.8);
   --contrast-clr: #E49FC5;
+  --purple: #6A5EA0;
   --shadow: 2px 2px 10px rgb(117, 117, 117);
+  --logo-font: "Bumerang"
 }

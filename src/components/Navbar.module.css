@@ -1,14 +1,74 @@
 .container{
-  background-color: antiquewhite;
-  color: black;
+  background-image: url("/background.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
   padding: 12px;
-  position: fixed;
+  /* position: fixed; */
   top: 0;
-  z-index: 1;
-  width: 100%;
+  /* z-index: 1; */
+  width: 100vw;
+  padding-bottom: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.delivery_info{
+  width: clamp(500px, 80vw, 1200px);
+  text-align: center;
 }
 ul{
   display: flex;
+  justify-content: space-between;
   gap: 12px;
   list-style-type: none;
+  margin: 12px;
+  width: clamp(500px, 80vw, 1200px);
+}
+.logo{
+  font-family: "Bumerang", sans-serif;
+  font-size: 4rem;
+  font-weight: 200;
+  stroke: aquamarine;
+}
+.svg{
+  stroke: white;
+  stroke-width: 1.5;
+  width: 28px;
+  aspect-ratio: 1/1;
+}
+.left_side,
+.right_side{
+  width: 80px;
+}
+.right_side{
+  display: flex;
+  gap: 1rem;
+  height: min-content;
+}
+.wrapper{
+  position: relative;
+}
+.link{
+  text-decoration: none;
+}
+.integer{
+  background-color: var(--purple);
+  width: 16px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  position: absolute;
+  bottom: 0;
+  right: -8px;
+}
+.integer p{
+  font-size: 0.7rem;
 }
