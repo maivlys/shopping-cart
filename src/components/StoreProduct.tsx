@@ -38,7 +38,7 @@ export function StoreProduct({
 
   // const [qntInput, setQntInput] = useState<string>("1");
 
-  // const [addedAlert, setAddedAlert] = useState<boolean>(false);
+  const [addedInfo, setAddedInfo] = useState<boolean>(false);
 
   const productQnt = cartItems.find((item) => item.id === id)?.quantity;
 
@@ -66,9 +66,11 @@ export function StoreProduct({
           src={imgUrl}
           alt="product-image"
         />
-        <div className={`${styles.heart_circle}`}>
+        <div
+          className={`${styles.heart_circle}`}
+          onClick={() => handleClick(id)}
+        >
           <svg
-            onClick={() => handleClick(id)}
             className={`${styles.heart} ${isFav(id) ? styles.fav : ""}`}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -91,27 +93,57 @@ export function StoreProduct({
       <div className={styles.purchase_section}>
         {!isInCart(id) ? (
           <button
+            className={`${styles.add_btn} ${!addedInfo ? styles.show : ""}`}
             onClick={() => {
               increaseQnt(id);
+              setAddedInfo(true);
+              setTimeout(() => {
+                setAddedInfo(false);
+              }, 2500);
             }}
-            //   setAddedAlert(true);
-            //   setTimeout(() => {
-            //     setAddedAlert(false);
-            //   }, 10000);
-            // }}
           >
-            Pridať do košíka
+            Vložiť do košíka
           </button>
         ) : (
-          <div>
-            <button onClick={() => decreaseQnt(id)}>-</button>
-            <input
-              readOnly
-              type="text"
-              value={productQnt}
-              // onChange={(e) => setQntInput(e.target.value)}
-            />
-            <button onClick={() => increaseQnt(id)}>+</button>
+          <div className={styles.wrapper}>
+            <div className={`${styles.added} ${addedInfo ? styles.show : ""}`}>
+              <svg
+                className={styles.check}
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              <p>Pridané</p>
+            </div>
+
+            <div
+              className={`${styles.qnt_section} ${addedInfo ? styles.hide : ""}`}
+            >
+              {" "}
+              <button
+                className={styles.qnt_control}
+                onClick={() => decreaseQnt(id)}
+              >
+                -
+              </button>
+              <input
+                className={styles.input}
+                readOnly
+                type="text"
+                value={productQnt}
+                // onChange={(e) => setQntInput(e.target.value)}
+              />
+              <button
+                className={styles.qnt_control}
+                onClick={() => increaseQnt(id)}
+              >
+                +
+              </button>
+            </div>
           </div>
         )}
         {/* {addedAlert === true ? (
@@ -150,8 +182,10 @@ export function StoreProduct({
             Add to cart
           </button>
         )} */}
-
-        <p>{formatCurrency(price)}</p>
+        <div className={styles.price_info}>
+          <p className={styles.price}>{formatCurrency(price)}</p>
+          <p className={styles.p}>s DPH</p>
+        </div>
       </div>
     </div>
   );
