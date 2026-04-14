@@ -75,7 +75,7 @@
   cursor: pointer;
   text-align: center;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* 👈 number of lines */
+  -webkit-line-clamp: 2; /*number of lines*/
   -webkit-box-orient: vertical;
   overflow: hidden;
   line-height: 1.2rem;
@@ -94,25 +94,22 @@
   /* gap: 1rem; */
 }
 .add_btn{
-  /* position: absolute;
-  bottom: 0;
-  right: 0; */
-  background-color: #E49FC5;
-  border: none;
+  background-color: var(--pink);
   color: white;
+  border: none;
   padding: 0px 8px ;
   width: 120px;
   height: 30px;
   align-self: center;
   text-align: right;
   border-radius: 0 0 0 40px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-soft);
   cursor: pointer;
-  transition: all 0.3s ease;
-  /* font-size: 0.8rem; */
+  /* transition: all 1s ease; */
 }
 .add_btn:hover{
-  opacity: 0.9;
+  background-color: white;
+  color: var(--pink);
 }
 .wrapper{
   position: relative;
@@ -121,7 +118,7 @@
 .qnt_section,
 .hide,
 .show{
-  transition: opacity 1s ease, transfrom 1s ease;
+  transition: opacity 1s ease, transfrom 1s ease, background-color 0.3s ease, color 0.3s ease; ;
 }
 .hide {
   opacity: 0;
@@ -169,12 +166,11 @@
 .input{
   width: 40px;
   outline: none;
-  /* border: 1px solid rgba(0, 0, 0, 0.2); */
   border: none;
   text-align: center;
   padding: 8px;
   border-radius: 4px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-soft);
   color: var(--grey);
   opacity: 0.8;
 }
@@ -182,22 +178,19 @@
   background-color: #E49FC5;
   border: none;
   color: white;
-  /* padding: 4px 8px; */
   width: 20px;
   aspect-ratio: 1/1;
   border-radius: 4px;
   cursor: pointer;
   opacity: 1;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-soft);
   transition: all 0.2s ease;
-
 }
 .qnt_control:hover{
   opacity: 0.9;
 }
 .qnt_control:active{
   opacity: 0.7;
-  /* border: 1px solid var(--pink); */
 }
 .price_info{
   display: flex;

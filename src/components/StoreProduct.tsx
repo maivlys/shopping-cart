@@ -1,7 +1,7 @@
 import styles from "./StoreProduct.module.css";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { useShoppingCart } from "../context/ShoppingCartContext";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useState } from "react";
 
 type ProductItemProps = {
