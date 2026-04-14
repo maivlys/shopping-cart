@@ -27,12 +27,16 @@ export function Navbar() {
             </svg>
           </div>
         </Link>
-        <h1 className={styles.logo}>PEARLA</h1>
+        <div className={styles.logo}>
+          <div className={`${styles.logo_circle} ${styles.one}`}></div>
+          <div className={`${styles.logo_circle} ${styles.two}`}></div>
+          <h1 className={styles.title}>PEARLA</h1>
+        </div>
         <div className={styles.right_side}>
           <Link to="/favorites" className={styles.link}>
             <div className={styles.wrapper}>
               <svg
-                className={styles.svg}
+                className={`${styles.svg} ${styles.heart}`}
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"

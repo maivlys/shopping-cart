@@ -7,7 +7,7 @@
   padding: 12px;
   /* position: fixed; */
   top: 0;
-  /* z-index: 1; */
+  z-index: 999;
   width: 100vw;
   padding-bottom: 200px;
   display: flex;
@@ -29,6 +29,24 @@ ul{
   width: clamp(500px, 80vw, 1200px);
 }
 .logo{
+  position: relative;
+}
+.logo_circle{
+  position: absolute;
+  width: 5px;
+  aspect-ratio: 1/1;
+  background-color: white;
+  border-radius: 50%;
+}
+.one{
+  left: 75px;
+  top: 33px;
+}
+.two{
+  bottom: 38px;
+  right: 27px;
+}
+.title{
   font-family: "Bumerang", sans-serif;
   font-size: 4rem;
   font-weight: 200;
@@ -55,6 +73,9 @@ ul{
 .link{
   text-decoration: none;
 }
+.heart{
+  transform: translateY(4px);
+}
 .integer{
   background-color: var(--purple);
   width: 16px;
@@ -71,4 +92,10 @@ ul{
 }
 .integer p{
   font-size: 0.7rem;
+}
+
+@media (min-width: 1800px) {
+  .container{
+    padding-bottom: 250px;
+  }
 }
