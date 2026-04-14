@@ -60,6 +60,8 @@ export function ProductPage() {
   const [productToOpen, setProductToOpen] = useState<string[]>([]);
   const [key, setKey] = useState<number | undefined>(undefined);
 
+  const inCart = isInCart(product.id);
+
   // const [selectedColor, setSelectedColor] = useState<string>("");
 
   // useEffect(() => {
@@ -79,20 +81,15 @@ export function ProductPage() {
   }
 
   useEffect(() => {
-    if (!isInCart(product.id)) {
+    if (!inCart) {
       setQntInput("1");
     }
-  }, [isInCart]);
+  }, [inCart]);
 
   return (
     <div className={styles.container}>
-      <section className={styles.product_details}>
-        <div className={styles.images}>
-          {/* {product.imgUrl.map((item,i)=>{
-            if (i===0) {
-              return
-            }
-          })} */}
+      <div className={styles.main_content}>
+        <section className={styles.images}>
           <img
             onClick={() => openModal(product.imgUrl, 0)}
             className={styles.img_main}
@@ -118,91 +115,92 @@ export function ProductPage() {
             isOpen={isImgOpen}
             onClose={() => setIsImgOpen(false)}
             productToOpen={productToOpen}
-            // imgUrl={product.imgUrl}
             clickedImgIndex={key}
           />
-        </div>
-        <div className={styles.info}>
-          <h2>
+        </section>
+        <section className={styles.info}>
+          <h2 className={styles.title}>
             {product.name} - {product.description}
           </h2>
 
-          <p>
-            {formatCurrency(product.price)} <span>s DPH</span>{" "}
+          <p className={styles.price}>
+            {formatCurrency(product.price)}{" "}
+            <span className={styles.supporting_text}>s DPH</span>{" "}
           </p>
           {product.colorOptions.length > 1 && (
-            <div>
-              <p>farba</p>
-              {product.colorOptions.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => {
-                    navigate(`/product/${item.id}`);
-                    // setSelectedColor(item);
-                    // product.colorSelected = item;
-                    // console.log(product);
-                  }}
-                  className={`${styles.color_options} ${product.id === item.id ? styles.selected : null}`}
-                >
-                  {item.color}
-                </button>
-              ))}
+            <div className={styles.color_options_section}>
+              <p className={styles.supporting_text}>Farba</p>
+              <div className={styles.color_options}>
+                {product.colorOptions.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      navigate(`/product/${item.id}`);
+                      // setSelectedColor(item);
+                      // product.colorSelected = item;
+                      // console.log(product);
+                    }}
+                    className={`${styles.color} ${product.id === item.id ? styles.selected : null}`}
+                  >
+                    {item.color}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
 
-          <div className={styles.quantity}>
-            <div>
-              <button
-                onClick={() => {
-                  if (!isInCart(product.id)) {
-                    setQntInput((prev) => {
-                      if (qntInput !== "1") {
-                        return String((parseInt(prev) || 0) - 1);
-                      } else {
-                        return "1";
-                      }
-                    });
-                  } else {
-                    decreaseQnt(product.id);
-                    // setQntInput("1");
-                  }
-                }}
-              >
-                -
-              </button>
-              <input
-                readOnly
-                type="text"
-                value={isInCart(product.id) ? productQntInCart : qntInput}
-                onChange={(e) => setQntInput(e.target.value)}
-              />
-              <button
-                onClick={() => {
-                  if (!isInCart(product.id)) {
-                    setQntInput((prev) => String((parseInt(prev) || 0) + 1));
-                  } else {
-                    increaseQnt(product.id);
-                    // setQntInput("1");
-                  }
-                  // if (isInCart(product.id)) {
-                  //   increaseQnt(product.id);
-                  // } else {
-                  //   increaseQnt(product.id, Number(qntInput));
-                  // }
-                }}
-              >
-                +
-              </button>
-
-              {isInCart(product.id) ? <span>V košíku</span> : null}
-            </div>
+          {/* <div className={styles.quantity}> */}
+          <div className={styles.qnt_section}>
+            <button
+              className={styles.qnt_control}
+              onClick={() => {
+                if (!inCart) {
+                  setQntInput((prev) => {
+                    if (qntInput !== "1") {
+                      return String((parseInt(prev) || 0) - 1);
+                    } else {
+                      return "1";
+                    }
+                  });
+                } else {
+                  decreaseQnt(product.id);
+                  // setQntInput("1");
+                }
+              }}
+            >
+              -
+            </button>
+            <input
+              className={styles.input}
+              readOnly
+              type="text"
+              value={inCart ? productQntInCart : qntInput}
+              onChange={(e) => setQntInput(e.target.value)}
+            />
+            <button
+              className={styles.qnt_control}
+              onClick={() => {
+                if (!inCart) {
+                  setQntInput((prev) => String((parseInt(prev) || 0) + 1));
+                } else {
+                  increaseQnt(product.id);
+                }
+              }}
+            >
+              +
+            </button>
           </div>
+          {/* </div> */}
           <div className={styles.actions}>
-            {!isInCart(product.id) ? (
-              <button onClick={() => increaseQnt(product.id, Number(qntInput))}>
-                Pridať do košíka
-              </button>
-            ) : null}
+            {/* {!inCart ? ( */}
+            <button
+              className={`${styles.actions_button} ${styles.add_button}`}
+              disabled={inCart}
+              onClick={() => increaseQnt(product.id, Number(qntInput))}
+            >
+              {inCart ? "V košíku" : "Vložiť do košíka"}
+            </button>
+            {/* // ) : null} */}
 
             <button
               onClick={() => {
@@ -212,9 +210,13 @@ export function ProductPage() {
                   addToFavs(product.id);
                 }
               }}
-              className={`${isFav(product.id) ? styles.isFav : null}`}
+              className={`${styles.actions_button} ${isFav(product.id) ? styles.isFav : null}`}
             >
-              <svg
+              {" "}
+              {isFav(product.id)
+                ? "Odstrániť z obľúbených"
+                : "Pridať do obľúbených"}
+              {/* <svg
                 width={25}
                 height={25}
                 fill="none"
@@ -226,7 +228,7 @@ export function ProductPage() {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-              </svg>
+              </svg> */}
             </button>
           </div>
           <div className={styles.details_grid}>
@@ -248,7 +250,8 @@ export function ProductPage() {
             <div>Dĺžka:</div>
             <div>{product.length}</div>
           </div>
-          <p>
+
+          <div className={styles.contact}>
             V prípade doplňujúcich otázok ti rada odpoviem. Napíš mi na{" "}
             <span
               onClick={() => {
@@ -263,21 +266,19 @@ export function ProductPage() {
               email
             </span>{" "}
             <svg
-              width={20}
-              height={20}
-              fill="none"
-              stroke="#ffffff"
+              className={styles.heart}
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={1.5}
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
             </svg>
-            {isCopied ? (
-              <span>
-                <svg
+            {/* {isCopied ? ( */}
+            <span
+              className={`${styles.confirmation} ${isCopied ? styles.show : ""}`}
+            >
+              {/* <svg
                   width={25}
                   height={25}
                   fill="none"
@@ -289,55 +290,98 @@ export function ProductPage() {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path d="M20 6 9 17l-5-5" />
-                </svg>
-                email skopírovaný do schránky
-              </span>
-            ) : null}
-          </p>
-          <div>
-            <div
-              onClick={() => {
-                setSectionsOpen((prev) => ({
-                  ...prev,
-                  delivery: !prev.delivery,
-                }));
-              }}
-            >
-              Prepravné informácie {sectionsOpen.delivery ? "⌃" : "⌄"}
-            </div>
-            {sectionsOpen.delivery ? (
-              <div>{`Na výber máte prepravu spoločnosťami Zásielkovňa (Packeta) a PPL, s možnosťou doručenia na vybrané miesto alebo priamo domov. Cena sa odvíja od zvolenej možnosti a začína od ${formatCurrency(3.4)}`}</div>
-            ) : (
-              <></>
-            )}
-
-            <div
-              onClick={() => {
-                setSectionsOpen((prev) => ({
-                  ...prev,
-                  care: !prev.care,
-                }));
-              }}
-            >
-              Starostlivosť
-              {sectionsOpen.care ? "⌃" : "⌄"}
-            </div>
-            {sectionsOpen.care ? (
-              <div>
-                V ideálnom prípade sa prosím vyhnite vystavovaniu šperkov vode,
-                kúpaniu, spaniu a cvičeniu. Nepoužívajte na šperky parfumy.
-                Správnou starostlivosťou môžete šperkom citelne predĺžiť
-                životnosť.
-              </div>
-            ) : (
-              <></>
-            )}
+                </svg> */}
+              email bol skopírovaný
+              {/* do schránky */}
+            </span>
+            {/* ) : null} */}
           </div>
-        </div>
-      </section>
-      <section className={styles.cart_summary}>
-        <CartSummary variant="mini" />
-      </section>
+          <div className={styles.additional_info}>
+            <div className={styles.additional_info_section}>
+              <div
+                className={styles.additional_info_title}
+                onClick={() => {
+                  setSectionsOpen((prev) => ({
+                    ...prev,
+                    delivery: !prev.delivery,
+                  }));
+                }}
+              >
+                <svg
+                  className={`${styles.additional_info_svg} ${styles.truck}`}
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+                  <path d="M17 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+                  <path d="M13 6h5l3 5v6h-2" />
+                  <path d="M5 17H3v-4" />
+                  <path d="M2 5h11v12" />
+                  <path d="M9 17h6" />
+                  <path d="M3 9h4" />
+                  <path d="M21 11h-8" />
+                </svg>
+                <p className={styles.additional_info_text}>
+                  {" "}
+                  Prepravné informácie
+                </p>{" "}
+                <span className={styles.additional_info_arrow}>
+                  {sectionsOpen.delivery ? "⌃" : "⌄"}
+                </span>
+              </div>
+              {sectionsOpen.delivery ? (
+                <div
+                  className={styles.additional_info_instructions}
+                >{`Na výber máte prepravu spoločnosťami Zásielkovňa (Packeta) a PPL, s možnosťou doručenia na vybrané miesto alebo priamo domov. Cena sa odvíja od zvolenej možnosti a začína od ${formatCurrency(3.4)}`}</div>
+              ) : null}
+            </div>
+            <div
+              className={`${styles.additional_info_section} ${styles.last_section}`}
+            >
+              <div
+                className={styles.additional_info_title}
+                onClick={() => {
+                  setSectionsOpen((prev) => ({
+                    ...prev,
+                    care: !prev.care,
+                  }));
+                }}
+              >
+                {" "}
+                <svg
+                  className={styles.additional_info_svg}
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+                <p className={styles.additional_info_text}>Starostlivosť</p>
+                <span className={styles.additional_info_arrow}>
+                  {sectionsOpen.care ? "⌃" : "⌄"}
+                </span>
+              </div>
+              {sectionsOpen.care ? (
+                <div className={styles.additional_info_instructions}>
+                  V ideálnom prípade sa prosím vyhnite vystavovaniu šperkov
+                  vode, kúpaniu, spaniu a cvičeniu. Nepoužívajte na šperky
+                  parfumy. Správnou starostlivosťou môžete šperkom citelne
+                  predĺžiť životnosť.
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </section>
+
+        {/* <section className={styles.cart_summary}>
+          <CartSummary variant="mini" />
+        </section> */}
+      </div>
     </div>
   );
 }

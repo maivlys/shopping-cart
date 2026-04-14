@@ -7,28 +7,43 @@
   justify-content: center;
   z-index: 9999;
 }
-.overlay span{
+.container{
   position: relative;
 }
-.overlay img {
+.img {
   max-width: 70vw;
   max-height: 80vh;
   object-fit: contain;
   border-radius: 20px;
 }
+.close_btn,
+.prev_btn,
+.next_btn{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
 .close_btn{
   position: absolute;
   top: -32px;
-  right: 0;
+  right: -8px;
 }
-.prev,
-.next{
+.prev_btn,
+.next_btn{
   position: absolute;
   top: 50%;
 }
-.prev{
+.prev_btn{
   left: -32px;
 }
-.next{
+.next_btn{
   right: -32px;
+}
+.svg{
+  width: 20px;
+  aspect-ratio: 1/1;
+  stroke: white;
+  stroke-width: 1.5;
+  opacity: 0.8;
 }
