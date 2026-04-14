@@ -86,17 +86,23 @@ export function Store() {
                 return (
                   <StoreProduct
                     key={item.id}
-                    id={item.id}
-                    name={item.name}
-                    description={item.description}
-                    price={item.price}
-                    imgUrl={item.imgUrl[0]}
-                    colorOptions={item.colorOptions}
+                    product={item}
+                    page={"store"}
+                    // id={item.id}
+                    // name={item.name}
+                    // description={item.description}
+                    // price={item.price}
+                    // imgUrl={item.imgUrl[0]}
+                    // colorOptions={item.colorOptions}
                   />
                 );
               })
             ) : (
-              <div>Ľutujeme, produkt, ktorý hľadáte, nie je dostupný</div>
+              <div className={styles.empty_filter}>
+                <p className={styles.message}>
+                  Ľutujeme, produkt, ktorý hľadáte, nie je dostupný
+                </p>
+              </div>
             )}
           </section>
         </div>
