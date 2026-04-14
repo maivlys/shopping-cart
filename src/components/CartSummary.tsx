@@ -11,7 +11,7 @@ type Props = {
 };
 
 export function CartSummary({ variant = "big", setStep }: Props) {
-  const { cartItems } = useShoppingCart();
+  const { cartItems, freeDeliveryPrice } = useShoppingCart();
   const navigate = useNavigate();
 
   let totalPrice = cartItems.reduce((total, cartItem) => {
@@ -80,13 +80,15 @@ export function CartSummary({ variant = "big", setStep }: Props) {
 
             {variant === "mini" ? (
               <>
-                {Number(totalPrice.toFixed(2)) >= 49 ? (
+                {Number(totalPrice.toFixed(2)) >= freeDeliveryPrice ? (
                   <p>Dopravu máš zdarma</p>
                 ) : (
                   <p>
                     Nakúp ešte za{" "}
                     <span>
-                      {formatCurrency(49 - Number(totalPrice.toFixed(2)))}
+                      {formatCurrency(
+                        freeDeliveryPrice - Number(totalPrice.toFixed(2)),
+                      )}
                     </span>{" "}
                     a využi dopravu zdarma{" "}
                   </p>
@@ -95,7 +97,7 @@ export function CartSummary({ variant = "big", setStep }: Props) {
                 <input
                   type="range"
                   min={0}
-                  max={49}
+                  max={freeDeliveryPrice}
                   value={totalPrice.toFixed(2)}
                 />
                 <button onClick={() => navigate(`/checkout`)}>
