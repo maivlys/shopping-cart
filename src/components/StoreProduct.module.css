@@ -31,7 +31,7 @@
   object-fit: cover;
   display: block;
 }
-.heart_circle{
+.svg_circle{
   position: absolute;
   bottom: 6px;
   right: 5px;
@@ -43,18 +43,25 @@
   border-radius: 50%;
   cursor: pointer;
 }
-.heart{
-  stroke: grey;
+.heart,
+.bin{
+  stroke: var(--grey);
+  opacity: 0.7;
   fill: none;
   width: 14px;
   aspect-ratio: 1/1;
   transition: all 0.3s ease;
 }
-.heart_circle:hover .heart{
+.svg_circle:hover .heart{
   stroke: #E49FC5;
+  opacity: 1;
+}
+.svg_circle:hover .bin{
+  opacity: 0.9;
 }
 .fav{
   fill: #E49FC5;
+  opacity: 1;
   stroke: none;
 }
 .img{

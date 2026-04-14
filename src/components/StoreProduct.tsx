@@ -5,25 +5,30 @@ import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 
 type ProductItemProps = {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  imgUrl: string;
-  colorOptions: {
-    color: string;
+  product: {
     id: number;
-  }[];
-  material: string;
-  length: string;
+    name: string;
+    description: string;
+    price: number;
+    imgUrl: string[];
+    colorOptions: {
+      color: string;
+      id: number;
+    }[];
+    material: string;
+    length: string;
+  };
+  page: string;
 };
 
 export function StoreProduct({
-  id,
-  name,
-  description,
-  price,
-  imgUrl,
+  product,
+  page,
+  // id,
+  // name,
+  // description,
+  // price,
+  // imgUrl,
 }: ProductItemProps) {
   const {
     increaseQnt,
@@ -39,8 +44,9 @@ export function StoreProduct({
   // const [qntInput, setQntInput] = useState<string>("1");
 
   const [addedInfo, setAddedInfo] = useState<boolean>(false);
+  const isStorePage = page === "store";
 
-  const productQnt = cartItems.find((item) => item.id === id)?.quantity;
+  const productQnt = cartItems.find((p) => p.id === product.id)?.quantity;
 
   function handleClick(id: number) {
     console.log(isFav(id));
@@ -50,52 +56,61 @@ export function StoreProduct({
     } else {
       addToFavs(id);
     }
-
-    // addToFavs(id);
-    // removeFromFavs(id);
   }
 
   return (
-    <div className={styles.container} key={id}>
+    <div className={styles.container} key={product.id}>
       <div className={styles.image_container}>
         <img
           onClick={() => {
-            navigate(`/product/${id}`);
+            navigate(`/product/${product.id}`);
           }}
           className={styles.img}
-          src={imgUrl}
+          src={product.imgUrl[0]}
           alt="product-image"
         />
         <div
-          className={`${styles.heart_circle}`}
-          onClick={() => handleClick(id)}
+          className={`${styles.svg_circle}`}
+          onClick={() => handleClick(product.id)}
         >
           <svg
-            className={`${styles.heart} ${isFav(id) ? styles.fav : ""}`}
+            className={`${isStorePage ? styles.heart : styles.bin}
+  ${isStorePage && isFav(product.id) ? styles.fav : ""}`}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={1.5}
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            {page === "store" ? (
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            ) : (
+              <>
+                {" "}
+                <path d="M3 6h18" />
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                <path d="M10 11v6" />
+                <path d="M14 11v6" />
+              </>
+            )}
           </svg>
         </div>
       </div>
       <p
         onClick={() => {
-          navigate(`/product/${id}`);
+          navigate(`/product/${product.id}`);
         }}
         className={styles.product_description}
       >
-        <span className={styles.product_name}>{name}</span> - {description}
+        <span className={styles.product_name}>{product.name}</span> -{" "}
+        {product.description}
       </p>
       <div className={styles.purchase_section}>
-        {!isInCart(id) ? (
+        {!isInCart(product.id) ? (
           <button
             className={`${styles.add_btn} ${!addedInfo ? styles.show : ""}`}
             onClick={() => {
-              increaseQnt(id);
+              increaseQnt(product.id);
               setAddedInfo(true);
               setTimeout(() => {
                 setAddedInfo(false);
@@ -126,7 +141,7 @@ export function StoreProduct({
               {" "}
               <button
                 className={styles.qnt_control}
-                onClick={() => decreaseQnt(id)}
+                onClick={() => decreaseQnt(product.id)}
               >
                 -
               </button>
@@ -139,51 +154,15 @@ export function StoreProduct({
               />
               <button
                 className={styles.qnt_control}
-                onClick={() => increaseQnt(id)}
+                onClick={() => increaseQnt(product.id)}
               >
                 +
               </button>
             </div>
           </div>
         )}
-        {/* {addedAlert === true ? (
-          <p>in cart</p>
-        ) : (
-          <button
-            onClick={() => {
-              increaseQnt(id);
-              setAddedAlert(true);
-              setTimeout(() => {
-                setAddedAlert(false);
-              }, 10000);
-            }}
-          >
-            Pridať do košíka
-          </button>
-        )} */}
-
-        {/* {isInCart(id) ? (
-          <>
-            <p>Added</p>
-            <button>
-              <Link to="/checkout">Prejsť do košíka</Link>
-            </button>
-          </>
-        ) : (
-          <button
-            onClick={() => {
-              // if (colorOptions.length > 1) {
-              //   navigate(`/product/${id}`);
-              // } else {
-              increaseQnt(id);
-              // }
-            }}
-          >
-            Add to cart
-          </button>
-        )} */}
         <div className={styles.price_info}>
-          <p className={styles.price}>{formatCurrency(price)}</p>
+          <p className={styles.price}>{formatCurrency(product.price)}</p>
           <p className={styles.p}>s DPH</p>
         </div>
       </div>
