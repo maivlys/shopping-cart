@@ -31,3 +31,15 @@
   grid-gap: 1rem;
   width: clamp(400px, 80vw, 1300px);
 }
+.message{
+  margin: 40px;
+  color: var(--grey);
+  opacity: 0.8;
+  font-size: 1.2rem;
+}
+/* .heart{
+  width: 20px;
+  aspect-ratio: 1/1;
+  fill: var(--dusty-pink);
+  vertical-align: middle;
+} */

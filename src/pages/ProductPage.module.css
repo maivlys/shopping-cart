@@ -112,7 +112,6 @@
   text-align: center;
   padding: 8px;
   border-radius: 12px;
-  border-radius: 12px;
   /* box-shadow: var(--shadow); */
   color: var(--grey);
   opacity: 0.8;
@@ -133,9 +132,6 @@
 .qnt_control:hover{
   /* opacity: 0.1; */
   /* font-size: 0.9rem; */
-}
-.qnt_control:active{
-  opacity: 0.7;
 }
 /* -----------------------figma buttons */
 /* -----------------------pink buttons */

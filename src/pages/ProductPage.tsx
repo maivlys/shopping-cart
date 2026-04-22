@@ -378,9 +378,9 @@ export function ProductPage() {
           </div>
         </section>
 
-        {/* <section className={styles.cart_summary}>
+        <section className={styles.cart_summary}>
           <CartSummary variant="mini" />
-        </section> */}
+        </section>
       </div>
     </div>
   );

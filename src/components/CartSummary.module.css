@@ -1,13 +1,80 @@
 .container{
-  border: 1px solid pink;
-  width: clamp(400px, 80%, 1000px);
-  padding: 20px;
+  /* border: 1px solid pink; */
+  width: clamp(400px, 80%, 900px);
+  padding: 16px;
+  background-color: var(--grey-light);
+  border-radius: 28px;
+
+}
+.p{
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--grey);
+  opacity: 0.85;
+  padding: 8px 0 0px 8px;
+  /* padding-top: 16px; */
 }
 .cart_items_section{
   margin: 20px 0;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: .6rem;
+}
+.total_price_container{
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.secondary_text{
+  opacity: 0.8;
+}
+.total_price{
+
+  text-align: right;
+  font-size: 1.5rem;
+  color: var(--purple);
+  font-weight: 600;
+}
+.step_controls{
+  width: clamp(400px, 80%, 1000px);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.step_controls__prev,
+.step_controls__next{
+  cursor: pointer;
+  border: none;
+  font-size: 0.9rem;
+}
+.step_controls__prev{
+  background-color: transparent;
+  opacity: 0.5;
+  text-decoration: underline;
+}
+.step_controls__next{
+  background-color: var(--pink);
+  color: white;
+  padding: 12px 14px;
+  border-radius: 20px 0;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s ease;
+  opacity: 0.9;
+}
+.step_controls__next:hover{
+  /* background-color: white; */
+  /* color: var(--pink); */
+  opacity: 1;
+}
+.step_controls__next.mini{
+  padding: 8px 10px;
+  font-size: 0.8rem;
+  border-radius: 16px 0;
+  margin-left: auto;
+  margin-top: 8px;
 }
 /* .step_controls{
   border: 1px solid pink;
@@ -19,9 +86,72 @@
 .step_controls__next{
   cursor: pointer;
 } */
+ .empty_cart_container{
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+ }
+ .message{
+  /* margin: 40px; */
+  color: var(--grey);
+  opacity: 0.8;
+  font-size: 1.2rem;
+}
 /* ----------------- mini ----------------- */
 .container.mini{
-  width: 300px;
-  background-color: rgba(85, 155, 217, 0.142);
+  position: absolute;
+  width: 400px;
   margin-top: -60px;
+  right: 10px;
+  border-radius: 16px;
+  padding: 16px;
 }
+.price{
+  /* border: 1px solid yellow; */
+  text-align: right;
+  font-size: 1.4rem;
+  color: var(--pink);
+}
+.total_price_container.mini{
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+.mini_version_delivery_limit .secondary_text{
+  /* color: red; */
+  margin-left: 4px;
+  line-height: 1.5rem;
+}
+.mini_version_delivery_limit{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-top: 0.8rem;
+}
+.slider{
+  width: 360px;
+  height: 8px;
+  background-color: white;
+  position: relative;
+}
+.truck{
+  position: absolute;
+  top: -8px;
+  /* left: 0px; */
+  width: 28px;
+  aspect-ratio: 1/1;
+  fill: none;
+  stroke: var(--grey);
+  stroke-width: 1.2;
+}
+/* .input::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #4caf50;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -5px;
+} */

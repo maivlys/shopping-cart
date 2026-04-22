@@ -14,7 +14,7 @@ type Props = {
   defaultValues: DeliveryData;
   onUpdateDelivery: (data: DeliveryData) => void;
   giftPackaging: boolean;
-  giftPackagingPrice: number;
+  // giftPackagingPrice: number;
   setStep: React.Dispatch<React.SetStateAction<string>>;
   finishProcess: () => void;
 };
@@ -24,11 +24,11 @@ export function Delivery({
   defaultValues,
   onUpdateDelivery,
   giftPackaging,
-  giftPackagingPrice,
+  // giftPackagingPrice,
   setStep,
   finishProcess,
 }: Props) {
-  const { cartItems } = useShoppingCart();
+  const { cartItems, giftPackagingPrice } = useShoppingCart();
   const [deliveryTo, setDeliveryTo] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
@@ -105,7 +105,7 @@ export function Delivery({
 
     return {
       value,
-      label: value === 0 ? "Doprava zdarma" : formatCurrency(value),
+      label: value === 0 ? "zdarma" : formatCurrency(value),
     };
   }
 
@@ -115,234 +115,286 @@ export function Delivery({
 
   return (
     <>
-      <div className={styles.container}>
-        <form onSubmit={handleSubmit(submitData)}>
-          <div className={styles.billing_info}>
-            <section>
-              <p>1. Vyberte krajinu doručenia</p>
-              <div>
+      <form className={styles.form} onSubmit={handleSubmit(submitData)}>
+        <div className={styles.container}>
+          <div className={styles.delivery_info}>
+            <section className={styles.form_section}>
+              <p
+                className={`${styles.title} ${errors.country ? styles.empty : ""}`}
+              >
+                1. Vyberte krajinu doručenia
+              </p>
+              <div
+                className={`${styles.input_container} ${errors.country ? styles.empty : ""}`}
+              >
                 <input
+                  className={styles.input}
                   type="radio"
                   id="cz"
                   {...register("country")}
                   value="cz"
                   onClick={(e) => setDeliveryTo(e.currentTarget.value)}
                 />
-                <label htmlFor="cz"> Česko </label>
+                <label className={styles.label} htmlFor="cz">
+                  {" "}
+                  Česko{" "}
+                </label>
               </div>
-              <div>
+              <div
+                className={`${styles.input_container} ${errors.country ? styles.empty : ""}`}
+              >
                 <input
+                  className={styles.input}
                   type="radio"
                   id="sk"
                   {...register("country")}
                   value="sk"
                   onClick={(e) => setDeliveryTo(e.currentTarget.value)}
                 />
-                <label htmlFor="sk"> Slovensko </label>
+                <label className={styles.label} htmlFor="sk">
+                  {" "}
+                  Slovensko{" "}
+                </label>
               </div>
-              {errors.country && (
+              {/* {errors.country && (
                 <span style={{ color: "red" }}>Vyberte možnosť</span>
-              )}
+              )} */}
             </section>
-            <section>
-              <p>2. Vyberte spôsob dopravy</p>
+            <section className={styles.form_section}>
+              <p
+                className={`${styles.title} ${errors.delivery ? styles.empty : ""}`}
+              >
+                2. Vyberte spôsob dopravy
+              </p>
 
-              <div className={styles.radio_option}>
-                <div>
-                  <input
-                    type="radio"
-                    id="packeta-box"
-                    {...register("delivery")}
-                    value="packeta-box"
-                  />
-                  <label htmlFor="packeta-box"> Packeta - Z-BOX</label>
-                </div>
-                <p>
+              <div
+                className={`${styles.input_container} ${errors.delivery ? styles.empty : ""}`}
+              >
+                <input
+                  className={styles.input}
+                  type="radio"
+                  id="packeta-box"
+                  {...register("delivery")}
+                  value="packeta-box"
+                />
+                <label className={styles.label} htmlFor="packeta-box">
+                  {" "}
+                  Packeta - Z-BOX
+                </label>
+                <p className={styles.price}>
                   {isFree
-                    ? "doprava zdarma"
+                    ? "zdarma"
                     : deliveryTo === "sk" || deliveryTo === ""
                       ? formatCurrency(3.4)
                       : formatCurrency(4.1)}
                 </p>
               </div>
-              <div className={styles.radio_option}>
-                <div>
-                  <input
-                    type="radio"
-                    id="packeta-home"
-                    {...register("delivery")}
-                    value="packeta-home"
-                  />
-                  <label htmlFor="packeta-home">
-                    {" "}
-                    Packeta – doručenie na adresu{" "}
-                  </label>
-                </div>
-                <p>
+              <div
+                className={`${styles.input_container} ${errors.delivery ? styles.empty : ""}`}
+              >
+                <input
+                  className={styles.input}
+                  type="radio"
+                  id="packeta-home"
+                  {...register("delivery")}
+                  value="packeta-home"
+                />
+                <label className={styles.label} htmlFor="packeta-home">
+                  {" "}
+                  Packeta – doručenie na adresu{" "}
+                </label>
+                <p className={styles.price}>
                   {isFree
-                    ? "doprava zdarma"
+                    ? "zdarma"
                     : deliveryTo === "sk" || deliveryTo === ""
                       ? formatCurrency(5.99)
                       : formatCurrency(7.2)}
                 </p>
               </div>
-              <div className={styles.radio_option}>
-                <div>
-                  <input
-                    type="radio"
-                    id="ppl-box"
-                    {...register("delivery")}
-                    value="ppl-box"
-                  />
-                  <label htmlFor="ppl-box"> PPL – Parcelbox</label>
-                </div>
-                <p>
+              <div
+                className={`${styles.input_container} ${errors.delivery ? styles.empty : ""}`}
+              >
+                <input
+                  className={styles.input}
+                  type="radio"
+                  id="ppl-box"
+                  {...register("delivery")}
+                  value="ppl-box"
+                />
+                <label className={styles.label} htmlFor="ppl-box">
+                  {" "}
+                  PPL – Parcelbox
+                </label>
+                <p className={styles.price}>
                   {isFree
-                    ? "doprava zdarma"
+                    ? "zdarma"
                     : deliveryTo === "sk" || deliveryTo === ""
                       ? formatCurrency(3.6)
                       : formatCurrency(4.7)}
                 </p>
               </div>
-              <div className={styles.radio_option}>
-                <div>
-                  <input
-                    type="radio"
-                    id="ppl-home"
-                    {...register("delivery")}
-                    value="ppl-home"
-                  />
-                  <label htmlFor="ppl-home"> PPL – doručenie na adresu</label>
-                </div>
-                <p>
+              <div
+                className={`${styles.input_container} ${errors.delivery ? styles.empty : ""}`}
+              >
+                <input
+                  className={styles.input}
+                  type="radio"
+                  id="ppl-home"
+                  {...register("delivery")}
+                  value="ppl-home"
+                />
+                <label className={styles.label} htmlFor="ppl-home">
+                  {" "}
+                  PPL – doručenie na adresu
+                </label>
+                <p className={styles.price}>
                   {" "}
                   {isFree
-                    ? "doprava zdarma"
+                    ? "zdarma"
                     : deliveryTo === "sk" || deliveryTo === ""
                       ? formatCurrency(5.99)
                       : formatCurrency(6.99)}
                 </p>
               </div>
-              {errors.delivery && (
+              {/* {errors.delivery && (
                 <span style={{ color: "red" }}>Vyberte možnosť</span>
-              )}
+              )} */}
             </section>
-            <section>
-              <p>3. Vyberte spôsob platby</p>
+            <section className={styles.form_section}>
+              <p
+                className={`${styles.title} ${errors.payment ? styles.empty : ""}`}
+              >
+                3. Vyberte spôsob platby
+              </p>
 
-              <div className={styles.radio_option}>
-                <div>
-                  <input
-                    type="radio"
-                    id="card"
-                    {...register("payment")}
-                    value="card"
-                  />
-                  <label htmlFor="card"> Platba kartou online </label>
-                </div>
-                <p>free</p>
-              </div>
-              <div className={styles.radio_option}>
-                <div>
-                  <input
-                    type="radio"
-                    id="paypal"
-                    {...register("payment")}
-                    value="paypal"
-                  />
-                  <label htmlFor="paypal"> PayPal </label>
-                </div>
-                <p>free</p>
-              </div>
-              <div className={styles.radio_option}>
-                <div>
-                  <input
-                    type="radio"
-                    id="transaction"
-                    {...register("payment")}
-                    value="transaction"
-                  />
-                  <label htmlFor="transaction"> Bankový prevod </label>
-                </div>
-                <p>free</p>
-              </div>
-              {errors.payment && (
-                <span style={{ color: "red" }}>Vyberte možnosť</span>
-              )}
-            </section>
-          </div>
-          <Review />
-          <div>
-            <div>
-              <p>Doprava: </p>
-              {selectedDelivery === "packeta-box" && (
-                <>
+              <div
+                className={`${styles.input_container} ${errors.payment ? styles.empty : ""}`}
+              >
+                <input
+                  className={styles.input}
+                  type="radio"
+                  id="card"
+                  {...register("payment")}
+                  value="card"
+                />
+                <label className={styles.label} htmlFor="card">
                   {" "}
-                  <p>Packeta - Z-BOX</p>
-                  <p>{deliveryPrice().label}</p>
-                  {/* <p>
-                    {Number(totalPrice.toFixed(2)) >= 49
-                      ? "doprava zdarma"
-                      : deliveryTo === "sk" || deliveryTo === ""
-                        ? formatCurrency(3.4)
-                        : formatCurrency(4.1)}
-                  </p> */}
-                </>
-              )}
-              {selectedDelivery === "packeta-home" && (
-                <>
-                  <p>Packeta - kuriér</p>
-                  <p>{deliveryPrice().label}</p>
-                </>
-              )}
-              {selectedDelivery === "ppl-box" && (
-                <>
-                  <p>PPL - Parcelbox</p>
-                  <p>{deliveryPrice().label}</p>
-                </>
-              )}
-              {selectedDelivery === "ppl-home" && (
-                <>
-                  <p>PPL - kuriér</p>
-                  <p>{deliveryPrice().label}</p>
-                </>
-              )}
-            </div>
-            <div>
-              <p>Platba:</p>
-              {selectedPayment === "card" && <p>Kartou online</p>}
-              {selectedPayment === "paypal" && <p>PayPal</p>}
-              {selectedPayment === "transaction" && <p>Bankový prevod</p>}
-            </div>{" "}
-            {giftPackaging && (
-              <p>+ Darčekové balenie {formatCurrency(giftPackagingPrice)}</p>
-            )}
+                  Platba kartou online{" "}
+                </label>
+                <p className={styles.price}>zdarma</p>
+              </div>
+              <div
+                className={`${styles.input_container} ${errors.payment ? styles.empty : ""}`}
+              >
+                <input
+                  className={styles.input}
+                  type="radio"
+                  id="paypal"
+                  {...register("payment")}
+                  value="paypal"
+                />
+                <label className={styles.label} htmlFor="paypal">
+                  {" "}
+                  PayPal{" "}
+                </label>
+                <p className={styles.price}>zdarma</p>
+              </div>
+              <div
+                className={`${styles.input_container} ${errors.payment ? styles.empty : ""}`}
+              >
+                <input
+                  className={styles.input}
+                  type="radio"
+                  id="transaction"
+                  {...register("payment")}
+                  value="transaction"
+                />
+                <label className={styles.label} htmlFor="transaction">
+                  {" "}
+                  Bankový prevod{" "}
+                </label>
+                <p className={styles.price}>zdarma</p>
+              </div>
+              {/* {errors.payment && (
+                <span style={{ color: "red" }}>Vyberte možnosť</span>
+              )} */}
+            </section>
           </div>
           <div>
-            <p>
-              Celkom s DPH{" "}
-              {formatCurrency(
-                cartItems.reduce((total, cartItem) => {
-                  const product = data.find((item) => item.id === cartItem.id);
-                  return total + (product?.price || 0) * cartItem.quantity;
-                }, 0) +
-                  (giftPackaging ? giftPackagingPrice : 0) +
-                  deliveryPrice().value,
-              )}{" "}
-            </p>
-          </div>
+            <Review
+              page={"delivery"}
+              giftPackaging={giftPackaging}
+              deliveryPrice={deliveryPrice}
+              selectedDelivery={selectedDelivery}
+              selectedPayment={selectedPayment}
+            />
+            {/* <div> */}
+            {/* <div>
+                <p>Doprava: </p>
+                {selectedDelivery === "packeta-box" && (
+                  <>
+                    {" "}
+                    <p>Packeta - Z-BOX</p>
+                    <p>{deliveryPrice().label}</p>
+                  </>
+                )}
+                {selectedDelivery === "packeta-home" && (
+                  <>
+                    <p>Packeta - kuriér</p>
+                    <p>{deliveryPrice().label}</p>
+                  </>
+                )}
+                {selectedDelivery === "ppl-box" && (
+                  <>
+                    <p>PPL - Parcelbox</p>
+                    <p>{deliveryPrice().label}</p>
+                  </>
+                )}
+                {selectedDelivery === "ppl-home" && (
+                  <>
+                    <p>PPL - kuriér</p>
+                    <p>{deliveryPrice().label}</p>
+                  </>
+                )}
+              </div> */}
+            {/* <div>
+                <p>Platba:</p>
+                {selectedPayment === "card" && <p>Kartou online</p>}
+                {selectedPayment === "paypal" && <p>PayPal</p>}
+                {selectedPayment === "transaction" && <p>Bankový prevod</p>}
+              </div>{" "} */}
+            {/* {giftPackaging && (
+                <p>+ Darčekové balenie {formatCurrency(giftPackagingPrice)}</p>
+              )} */}
+            {/* </div> */}
+            {/* <div>
+              <p>
+                Celkom s DPH{" "}
+                {formatCurrency(
+                  cartItems.reduce((total, cartItem) => {
+                    const product = data.find(
+                      (item) => item.id === cartItem.id,
+                    );
+                    return total + (product?.price || 0) * cartItem.quantity;
+                  }, 0) +
+                    (giftPackaging ? giftPackagingPrice : 0) +
+                    deliveryPrice().value,
+                )}{" "}
+              </p>
+            </div> */}
 
-          <section className={styles.step_controls}>
-            <button
-              className={styles.step_controls__prev}
-              onClick={() => setStep("billing")}
-            >
-              Späť
-            </button>
-            <button type="submit" className={styles.step_controls__next}>
-              Objednať s povinnosťou platby
-            </button>
-          </section>
+            <section className={styles.step_controls}>
+              <button
+                className={styles.step_controls__prev}
+                onClick={() => setStep("billing")}
+              >
+                Späť
+              </button>
+              <button type="submit" className={styles.step_controls__next}>
+                Objednať s povinnosťou platby
+              </button>
+            </section>
+          </div>
           {step === "purchase" && (
             <PurchaseConfirmationModal
               finishProcess={finishProcess}
@@ -350,8 +402,8 @@ export function Delivery({
               setLoading={setLoading}
             />
           )}
-        </form>
-      </div>
+        </div>
+      </form>
     </>
   );
 }

@@ -1,34 +1,126 @@
 .container{
-  border: 1px solid aqua;
+  /* border: 1px solid aqua; */
   display: flex;
   justify-content: space-between;
+  background-color: white;
+  padding: 12px;
+  border-radius: 14px;
+  color: var(--grey);
 }
 .product_review{
   display: flex;
-  border: 1px solid greenyellow;
+  /* border: 1px solid greenyellow; */
+
 }
 .cart_product_img{
-  width: 150px;
+  width: 130px;
   aspect-ratio: 1/1;
   object-fit: cover;
+  border-radius: 16px;
+  cursor: pointer;
+}
+.info{
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.3rem;
+}
+.info.mini{
+  gap: 0.1rem;
+}
+.product_name{
+  font-size: 1rem;
+}
+.unit_price{
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+.mini .unit_price{
+  font-size: 0.8rem;
+}
+.qnt_section{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: .3rem;
+  width: min-content;
+  /* margin-left: 24px; */
+  border: 1px solid rgb(190, 190, 190);
+
+  border-radius: 2px;
+  /* position: absolute; */
+}
+.qnt_section.mini .input{
+  width: 16px;
+  padding: 4px;
+}
+.qnt_section.mini .qnt_control{
+  width: 20px;
 }
 .input{
-  pointer-events: none;
-  width: 24px;
+  width: 32px;
+  outline: none;
+  border: none;
   text-align: center;
+  padding: 8px;
+  border-radius: 12px;
+  /* box-shadow: var(--shadow); */
+  color: var(--grey);
+  opacity: 0.8;
+}
+.qnt_control{
+  border: none;
+  background-color: transparent;
+  color: var(--grey);
+  width: 28px;
+  aspect-ratio: 1/1;
+  border-radius: 4px;
+  cursor: pointer;
+  /* opacity: 1; */
+  /* box-shadow: var(--shadow); */
+  transition: all 0.2s ease;
+  font-size: 0.8rem;
 }
 .price{
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
   text-align: right;
+  font-size: 1.5rem;
+  color: var(--purple);
 }
+.remove_button{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: auto;
+}
+.mini .svg_bin{
+  width: 16px;
+}
+.svg_bin{
+  width: 20px;
+  aspect-ratio: 1/1;
+  stroke-width: 1.5;
+  stroke: var(--grey);
+  transition: transform 0.3s ease;
+  opacity: 0.5;
+}
+.remove_button:hover .svg_bin{
+  transform: scale(1.1);
+}
+
 /* ----------------- mini ----------------- */
 .container.mini{
   display: flex;
+  border-radius: 12px;
+  padding: 12px
   /* justify-content: space-between; */
   /* width: 100%; */
 }
 .cart_product_img.mini{
-  width: 80px;
+  width: 90px;
   aspect-ratio: 1/1;
   object-fit: cover;
+  border-radius: 10px;
 }

@@ -47,14 +47,34 @@ export function CartItem({ id, quantity, variant }: CartItemProps) {
             variant === "big" ? navigate(`/product/${product.id}`) : null;
           }}
         />
-        <div className={styles.info}>
-          <p>
+        <div
+          className={`${styles.info} ${
+            variant === "big" ? styles.big : styles.mini
+          }`}
+        >
+          <p className={styles.product_name}>
             {product.name}
-            {product.description.includes("-") ? `- ${selectedColor()}` : ""}
+            {variant === "big"
+              ? `- ${product.description}`
+              : product.description.includes("-")
+                ? `- ${selectedColor()}`
+                : null}
+            {/* {product.description.includes("-") ? `- ${selectedColor()}` : ""} */}
           </p>
-          <p>{formatCurrency(product.price)} /ks</p>
-          <div className={styles.quantity}>
-            <button onClick={() => decreaseQnt(id)}>-</button>
+          <p className={styles.unit_price}>
+            {formatCurrency(product.price)} /ks
+          </p>
+          <div
+            className={`${styles.qnt_section} ${
+              variant === "big" ? styles.big : styles.mini
+            }`}
+          >
+            <button
+              className={styles.qnt_control}
+              onClick={() => decreaseQnt(id)}
+            >
+              -
+            </button>
             <input
               readOnly
               type="text"
@@ -63,18 +83,23 @@ export function CartItem({ id, quantity, variant }: CartItemProps) {
                 variant === "big" ? styles.big : styles.mini
               }`}
             />
-            <button onClick={() => increaseQnt(id)}>+</button>
+            <button
+              className={styles.qnt_control}
+              onClick={() => increaseQnt(id)}
+            >
+              +
+            </button>
           </div>
 
-          <button onClick={() => removeFromCart(id)}>
+          <button
+            className={styles.remove_button}
+            onClick={() => removeFromCart(id)}
+          >
             <svg
-              width={25}
-              height={25}
+              className={styles.svg_bin}
               fill="none"
-              stroke="#000000"
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={1.5}
               viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -86,8 +111,10 @@ export function CartItem({ id, quantity, variant }: CartItemProps) {
           </button>
         </div>
       </div>
-      <div className={styles.price}>
-        <p>{formatCurrency(product.price * quantity)}</p>{" "}
+      <div>
+        <p className={styles.price}>
+          {formatCurrency(product.price * quantity)}
+        </p>{" "}
       </div>
     </div>
   );

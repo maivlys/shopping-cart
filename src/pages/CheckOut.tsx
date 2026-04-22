@@ -51,7 +51,7 @@ export function CheckOut() {
   };
 
   const [formData, setFormData] = useState<FormData>(INITIAL_DATA);
-  const giftPackagingPrice = 1.5;
+
   console.log(formData);
 
   // function toPrev() {
@@ -101,22 +101,39 @@ export function CheckOut() {
   }, [formData]);
 
   return (
-    <div className={styles.container}>
+    <div
+      className={`${styles.container} ${step !== "purchase" ? styles.not_purchase : ""}`}
+    >
       <section className={styles.step_navigation}>
         <div
-          className={`${styles.step} ${step === "cart" || step === "billing" || step === "delivery" ? styles.active : ""}`}
+          className={`${styles.step} ${styles.one} ${step === "cart" || step === "billing" || step === "delivery" ? styles.active : ""}`}
         >
-          <span>1</span> Nákupný košík
+          <div
+            className={`${styles.circle}  ${step === "cart" || step === "billing" || step === "delivery" ? styles.active : ""}`}
+          >
+            1
+          </div>{" "}
+          <p className={styles.title}> Nákupný košík</p>
         </div>
         <div
-          className={`${styles.step} ${step === "billing" || step === "delivery" ? styles.active : ""}`}
+          className={`${styles.step} ${styles.two} ${step === "billing" || step === "delivery" ? styles.active : ""}`}
         >
-          <span>2</span> fakturačné údaje
+          <div
+            className={`${styles.circle}  ${step === "cart" || step === "billing" || step === "delivery" ? styles.active : ""}`}
+          >
+            2
+          </div>{" "}
+          <p className={styles.title}> Fakturačné údaje</p>
         </div>
         <div
-          className={`${styles.step} ${step === "delivery" ? styles.active : ""}`}
+          className={`${styles.step} ${styles.three} ${step === "delivery" ? styles.active : ""}`}
         >
-          <span>3</span> Doprava a platba
+          <div
+            className={`${styles.circle} ${step === "cart" || step === "billing" || step === "delivery" ? styles.active : ""}`}
+          >
+            3
+          </div>{" "}
+          <p className={styles.title}> Doprava a platba</p>
         </div>
       </section>
       {step === "cart" ? (
@@ -127,7 +144,7 @@ export function CheckOut() {
           onUpdateBilling={(billing) =>
             setFormData((prev) => ({ ...prev, billing }))
           }
-          giftPackagingPrice={giftPackagingPrice}
+          // giftPackagingPrice={giftPackagingPrice}
           setStep={setStep}
         />
       ) : (
@@ -138,7 +155,7 @@ export function CheckOut() {
             setFormData((prev) => ({ ...prev, delivery }))
           }
           giftPackaging={formData.billing.giftPackaging}
-          giftPackagingPrice={giftPackagingPrice}
+          // giftPackagingPrice={giftPackagingPrice}
           finishProcess={finishProcess}
           setStep={setStep}
         />

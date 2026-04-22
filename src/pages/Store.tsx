@@ -100,7 +100,7 @@ export function Store() {
             ) : (
               <div className={styles.empty_filter}>
                 <p className={styles.message}>
-                  Ľutujeme, produkt, ktorý hľadáte, nie je dostupný
+                  Ľutujeme, produkt, ktorý hľadáš, nie je dostupný
                 </p>
               </div>
             )}

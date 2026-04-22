@@ -26,8 +26,10 @@
 }
 .close_btn{
   position: absolute;
-  top: -32px;
-  right: -8px;
+  /* top: -32px;
+  right: -8px; */
+  top: 8px;
+  right: 10px;
 }
 .prev_btn,
 .next_btn{

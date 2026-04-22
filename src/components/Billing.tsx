@@ -11,17 +11,17 @@ import { useEffect, useRef, useState } from "react";
 type Props = {
   defaultValues: BillingData;
   onUpdateBilling: (data: BillingData) => void;
-  giftPackagingPrice: number;
+  // giftPackagingPrice: number;
   setStep: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export function Billing({
   defaultValues,
   onUpdateBilling,
-  giftPackagingPrice,
+  // giftPackagingPrice,
   setStep,
 }: Props) {
-  const { cartItems } = useShoppingCart();
+  const { cartItems, giftPackagingPrice } = useShoppingCart();
 
   const termsRef = useRef<HTMLInputElement>(null);
   const [termsError, setTermsError] = useState(false);
@@ -125,15 +125,17 @@ export function Billing({
 
   return (
     <>
-      <div className={styles.container}>
-        <form onSubmit={handleSubmit(submitData)}>
-          <div className={styles.billing_info}>
+      <form className={styles.form} onSubmit={handleSubmit(submitData)}>
+        <div className={styles.container}>
+          <div className={`${styles.billing_info} ${styles.left_side}`}>
             {/* <form action="submit" onSubmit={handleSubmit}> */}
 
-            <section>
-              <p>Dodacie a fakturačné údaje</p>
-              <div>
-                <label htmlFor="name">Meno*</label>
+            <section className={styles.form_section}>
+              <p className={styles.title}>Dodacie a fakturačné údaje</p>
+              <div className={styles.input_group}>
+                <label className={styles.label} htmlFor="name">
+                  Meno<span className={styles.star}>*</span>
+                </label>
                 <input
                   className={`${styles.input} ${errors.firstName ? styles.empty : null}`}
                   {...register("firstName")}
@@ -148,8 +150,10 @@ export function Billing({
                   </span>
                 )} */}
               </div>
-              <div>
-                <label htmlFor="name">Priezvisko*</label>
+              <div className={styles.input_group}>
+                <label className={styles.label} htmlFor="name">
+                  Priezvisko<span className={styles.star}>*</span>
+                </label>
                 <input
                   className={`${styles.input} ${errors.lastName ? styles.empty : null}`}
                   {...register("lastName")}
@@ -163,8 +167,10 @@ export function Billing({
                   </span>
                 )} */}
               </div>
-              <div>
-                <label htmlFor="email">Email*</label>
+              <div className={styles.input_group}>
+                <label className={styles.label} htmlFor="email">
+                  Email<span className={styles.star}>*</span>
+                </label>
                 <input
                   className={`${styles.input} ${errors.email ? styles.empty : null}`}
                   {...register("email")}
@@ -175,8 +181,10 @@ export function Billing({
                   <span style={{ color: "red" }}> {errors.email.message}</span>
                 )} */}
               </div>
-              <div>
-                <label htmlFor="street">Ulica / číslo*</label>
+              <div className={styles.input_group}>
+                <label className={styles.label} htmlFor="street">
+                  Ulica / číslo<span className={styles.star}>*</span>
+                </label>
                 <input
                   className={`${styles.input} ${errors.street ? styles.empty : null}`}
                   {...register("street")}
@@ -187,8 +195,10 @@ export function Billing({
                   <span style={{ color: "red" }}> {errors.street.message}</span>
                 )} */}
               </div>
-              <div>
-                <label htmlFor="town">Mesto*</label>
+              <div className={styles.input_group}>
+                <label className={styles.label} htmlFor="town">
+                  Mesto<span className={styles.star}>*</span>
+                </label>
                 <input
                   className={`${styles.input} ${errors.town ? styles.empty : null}`}
                   {...register("town")}
@@ -199,8 +209,10 @@ export function Billing({
                   <span style={{ color: "red" }}> {errors.town.message}</span>
                 )} */}
               </div>
-              <div>
-                <label htmlFor="post-code">PSČ*</label>
+              <div className={styles.input_group}>
+                <label className={styles.label} htmlFor="post-code">
+                  PSČ<span className={styles.star}>*</span>
+                </label>
                 <input
                   className={`${styles.input} ${errors.psc ? styles.empty : null}`}
                   {...register("psc")}
@@ -212,8 +224,10 @@ export function Billing({
                   <span style={{ color: "red" }}> expected form: 000 00</span>
                 )} */}
               </div>
-              <div>
-                <label htmlFor="phone-number">Telefón*</label>
+              <div className={styles.input_group}>
+                <label className={styles.label} htmlFor="phone-number">
+                  Telefón<span className={styles.star}>*</span>
+                </label>
                 <input
                   className={`${styles.input} ${errors.phone ? styles.empty : null}`}
                   placeholder="+420 000 000"
@@ -226,8 +240,8 @@ export function Billing({
                 )} */}
               </div>
             </section>
-            <section>
-              <p>Balenie</p>
+            <section className={styles.gift_section}>
+              <p className={styles.title}>Balenie</p>
               {/* <form action=""> */}
               {/* <div>
                 <input
@@ -238,8 +252,9 @@ export function Billing({
                 />
                 <label htmlFor="free"> free </label>
               </div> */}
-              <div>
+              <div className={styles.input_container}>
                 <input
+                  className={styles.gift_checkbox}
                   type="checkbox"
                   id="giftPackaging"
                   {...register("giftPackaging")}
@@ -247,8 +262,13 @@ export function Billing({
                   checked={giftPackaging}
                   onChange={(e) => setGiftPackaging(e.target.checked)}
                 />
-                <label htmlFor="giftPackaging"> Darčekové balenie </label>
-                <p>{formatCurrency(giftPackagingPrice)}</p>
+                <label className={styles.label} htmlFor="giftPackaging">
+                  {" "}
+                  Darčekové balenie{" "}
+                </label>
+                <p className={styles.gift_price}>
+                  {formatCurrency(giftPackagingPrice)}
+                </p>
               </div>
               {/* {errors.giftPackaging && (
                 <span style={{ color: "red" }}>
@@ -260,12 +280,11 @@ export function Billing({
             </section>
 
             {/* </form> */}
-            <br />
-            <br />
 
-            <section>
+            <section className={styles.check_section}>
               <div>
                 <input
+                  className={styles.checkbox}
                   onClick={() => {
                     if (termsError === true) {
                       setTermsError(false);
@@ -277,7 +296,7 @@ export function Billing({
                   name="scales"
                 />
                 <label
-                  className={`${termsError ? styles.terms_error : ""}`}
+                  className={` ${styles.label} ${termsError ? styles.terms_error : ""}`}
                   htmlFor="scales"
                 >
                   Súhlasím s obchodnými podmienkami a potvrdzujem, že som sa
@@ -286,48 +305,35 @@ export function Billing({
               </div>
               <div>
                 <input
+                  className={styles.checkbox}
                   {...register("newsletter")}
                   type="checkbox"
                   id="newsletter"
                   name="newsletter"
                 />
-                <label htmlFor="newsletter">
+                <label className={styles.label} htmlFor="newsletter">
                   Chcem dostávať novinky, zľavy, inšpirácie a špeciálne ponuky
                   e-mailom.
                 </label>
               </div>
             </section>
           </div>
-          <div>
-            <Review />
-            <div>
-              {giftPackaging && (
-                <p>+ Darčekové balenie {formatCurrency(giftPackagingPrice)}</p>
-              )}
-            </div>
-            <p>
-              Celkom s DPH{" "}
-              {formatCurrency(
-                cartItems.reduce((total, cartItem) => {
-                  const product = data.find((item) => item.id === cartItem.id);
-                  return total + (product?.price || 0) * cartItem.quantity;
-                }, 0) + (giftPackaging ? giftPackagingPrice : 0),
-              )}{" "}
-            </p>
+          <div className={styles.right_side}>
+            <Review giftPackaging={giftPackaging} page={"billing"} />
+            <section className={styles.step_controls}>
+              <button
+                className={styles.step_controls__prev}
+                onClick={() => setStep("cart")}
+              >
+                Späť
+              </button>
+              <button type="submit" className={styles.step_controls__next}>
+                Pokračovať v objednávke
+              </button>
+            </section>
           </div>
-          <section className={styles.step_controls}>
-            <button
-              className={styles.step_controls__prev}
-              onClick={() => setStep("cart")}
-            >
-              Späť
-            </button>
-            <button type="submit" className={styles.step_controls__next}>
-              Potvrdiť
-            </button>
-          </section>
-        </form>
-      </div>
+        </div>
+      </form>
     </>
   );
 }

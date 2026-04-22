@@ -21,6 +21,7 @@ type ShoppingCartContext = {
   addToFavs: (id: number) => void;
   removeFromFavs: (id: number) => void;
   freeDeliveryPrice: number;
+  giftPackagingPrice: number;
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -51,6 +52,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   );
 
   const freeDeliveryPrice = 49;
+  const giftPackagingPrice = 1.5;
 
   useEffect(() => {
     console.log(cartItems);
@@ -144,6 +146,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         addToFavs,
         removeFromFavs,
         freeDeliveryPrice,
+        giftPackagingPrice,
       }}
     >
       {children}
