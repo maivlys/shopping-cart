@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, useLocation } from "react-router";
 import data from "../data/data.json";
 import styles from "./ProductPage.module.css";
 import { useShoppingCart } from "../context/ShoppingCartContext";
@@ -25,6 +25,12 @@ type Product = {
 
 export function ProductPage() {
   const { openCartPreview, setOpenCartPreview } = useShoppingCart();
+
+  const location = useLocation();
+  useEffect(() => {
+    setOpenCartPreview(false);
+  }, [location.pathname]);
+
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const navigate = useNavigate();
 
