@@ -133,7 +133,7 @@ export function CheckOut() {
           >
             3
           </div>{" "}
-          <p className={styles.title}> Doprava a platba</p>
+          <p className={styles.title}> Doprava a&nbsp;platba</p>
         </div>
       </section>
       {step === "cart" ? (

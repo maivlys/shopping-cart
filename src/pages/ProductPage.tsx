@@ -25,6 +25,7 @@ type Product = {
 };
 
 export function ProductPage() {
+  const { openCartPreview, setOpenCartPreview } = useShoppingCart();
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -86,10 +87,12 @@ export function ProductPage() {
     }
   }, [inCart]);
 
+  // setOpenCartPreview(false);
+
   return (
     <div className={styles.container}>
       <div className={styles.main_content}>
-        <section className={styles.images}>
+        <section className={`${styles.images} ${styles.desktop}`}>
           <img
             onClick={() => openModal(product.imgUrl, 0)}
             className={styles.img_main}
@@ -122,6 +125,39 @@ export function ProductPage() {
           <h2 className={styles.title}>
             {product.name} - {product.description}
           </h2>
+
+          <section className={`${styles.images} ${styles.mobile}`}>
+            <div className={styles.wrapper}>
+              <img
+                onClick={() => openModal(product.imgUrl, 0)}
+                className={styles.img_main}
+                src={product.imgUrl[0]}
+                alt="main-product-picture"
+              />
+            </div>
+
+            <div className={styles.imgs_additional}>
+              {product.imgUrl.map((item, i) => {
+                if (i === 0) {
+                  return null;
+                }
+                return (
+                  <img
+                    onClick={() => openModal(product.imgUrl, i)}
+                    className={styles.img_small}
+                    src={product.imgUrl[i]}
+                    alt="product-picture-detail"
+                  />
+                );
+              })}
+            </div>
+            <ImageModal
+              isOpen={isImgOpen}
+              onClose={() => setIsImgOpen(false)}
+              productToOpen={productToOpen}
+              clickedImgIndex={key}
+            />
+          </section>
 
           <p className={styles.price}>
             {formatCurrency(product.price)}{" "}
@@ -378,7 +414,15 @@ export function ProductPage() {
           </div>
         </section>
 
-        <section className={styles.cart_summary}>
+        <section
+          onMouseEnter={() => {
+            setOpenCartPreview(true);
+          }}
+          onMouseLeave={() => {
+            setOpenCartPreview(false);
+          }}
+          className={`${styles.cart_summary}  ${openCartPreview ? styles.showPreview : ""}`}
+        >
           <CartSummary variant="mini" />
         </section>
       </div>

@@ -2,18 +2,44 @@ import styles from "./Navbar.module.css";
 import { Link } from "react-router";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import { formatCurrency } from "../utilities/formatCurrency";
+import { useEffect, useState } from "react";
 
 export function Navbar() {
-  const { getTotalQnt, favs, freeDeliveryPrice } = useShoppingCart();
+  const { getTotalQnt, favs, freeDeliveryPrice, setOpenCartPreview } =
+    useShoppingCart();
+
+  function useMaxWidth(maxWidth: number) {
+    const [matches, setMatches] = useState(
+      window.matchMedia(`(max-width: ${maxWidth}px)`).matches,
+    );
+
+    useEffect(() => {
+      const media = window.matchMedia(`(max-width: ${maxWidth}px)`);
+
+      const listener = () => setMatches(media.matches);
+      media.addEventListener("change", listener);
+
+      return () => media.removeEventListener("change", listener);
+    }, [maxWidth]);
+
+    return matches;
+  }
+
+  const isAllowedHover = useMaxWidth(1300);
 
   return (
     <div className={styles.container}>
       <div className={styles.delivery_info}>
         <p>Doprava zdarma pri nákupe nad {formatCurrency(freeDeliveryPrice)}</p>
       </div>
-      <ul>
+      <ul className={styles.ul}>
+        <div className={`${styles.logo} ${styles.mobile}`}>
+          <div className={`${styles.logo_circle} ${styles.one}`}></div>
+          <div className={`${styles.logo_circle} ${styles.two}`}></div>
+          <h1 className={styles.title}>PEARLA</h1>
+        </div>
         <Link to="/">
-          <div className={styles.left_side}>
+          <div className={`${styles.left_side} ${styles.desktop}`}>
             <svg
               className={styles.svg}
               fill="none"
@@ -27,12 +53,27 @@ export function Navbar() {
             </svg>
           </div>
         </Link>
-        <div className={styles.logo}>
+        <div className={`${styles.logo} ${styles.desktop}`}>
           <div className={`${styles.logo_circle} ${styles.one}`}></div>
           <div className={`${styles.logo_circle} ${styles.two}`}></div>
           <h1 className={styles.title}>PEARLA</h1>
         </div>
         <div className={styles.right_side}>
+          <Link to="/">
+            <div className={`${styles.left_side} ${styles.mobile}`}>
+              <svg
+                className={styles.svg}
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <path d="M9 22V12h6v10" />
+              </svg>
+            </div>
+          </Link>
           <Link to="/favorites" className={styles.link}>
             <div className={styles.wrapper}>
               <svg
@@ -51,7 +92,18 @@ export function Navbar() {
             </div>
           </Link>
           <Link to="/checkout" className={styles.link}>
-            <div className={styles.wrapper}>
+            <div
+              onMouseEnter={() => {
+                if (!isAllowedHover) return;
+                setOpenCartPreview(true);
+              }}
+              // onMouseLeave={() => {
+              //   setTimeout(() => {
+              //     setOpenCartPreview(false);
+              //   }, 2500);
+              // }}
+              className={styles.wrapper}
+            >
               <svg
                 className={styles.svg}
                 fill="none"

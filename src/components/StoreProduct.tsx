@@ -75,7 +75,7 @@ export function StoreProduct({
         >
           <svg
             className={`${isStorePage ? styles.heart : styles.bin}
-  ${isStorePage && isFav(product.id) ? styles.fav : ""}`}
+                        ${isStorePage && isFav(product.id) ? styles.fav : ""}`}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={1.5}

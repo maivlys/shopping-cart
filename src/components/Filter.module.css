@@ -1,22 +1,55 @@
 .filter{
   flex-shrink: 0;
   width: 250px;
-  height: 380px;
+  /* height: 380px; */
   border-radius: 8px;
-  background-color: #F0F0F0;
   color: var(--grey);
+  position: relative;
 }
 .container{
   display: grid;
   grid-template-rows: 0.6fr 1fr 1fr 0.5fr;
   gap: 1rem;
   padding: 16px;
+  background-color: var(--grey-light);
+  border-radius: 0 0 8px 8px;
 }
+
 .banner{
   height: 30px;
+  width: 250px;
   background-image: linear-gradient(90deg, var(--purple), var(--pink));
   width: 100%;
   border-radius: 8px 8px 0 0;
+}
+.banner.plain{
+  display: block;
+}
+.banner.toggle_btn{
+  display: none;
+  color: white;
+  cursor: pointer;
+}
+@media (max-width: 1255px){
+  .container{
+    /* display: none; */
+    position: absolute;
+    z-index: 100;
+
+  }
+  .container.hide{
+    display: none;
+  }
+  .banner.toggle_btn{
+    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px;
+  }
+  .banner.plain{
+    display: none;
+  }
 }
 .title{
   font-weight:500;

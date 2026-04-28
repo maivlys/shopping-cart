@@ -7,11 +7,23 @@
   color: var(--grey);
   /* border: 1px solid rgb(28, 208, 187); */
   margin-bottom: 60px;
+  margin-top:-100px;
+
+  /* transform: translateY(0px); */
+
   /* transform: translateY(-80px); */
 
 }
+
 .container.not_purchase{
-  transform: translateY(80px);
+  /* transform: translateY(-140px); */
+}
+@media (min-width: 2100px) {
+  .container{
+    margin-top:-250px;
+    /* background-color: red; */
+    /* transform: translateY(-900px); */
+  }
 }
 .step_navigation{
   /* border: white solid 1px; */
@@ -19,6 +31,7 @@
   display: flex;
   /* gap: 40px; */
   margin-bottom: 2rem;
+  transform: translateX(-20px);
 }
 .step{
   /* background-color: rgba(16, 16, 16, 0.1); */
@@ -48,6 +61,7 @@
 .step:first-child{
   width: 340px;
 }
+
 /* .step::before{
   position: absolute;
   right: -29px;
@@ -67,6 +81,7 @@
   transform: rotate(45deg);
   box-shadow: var(--shadow-soft-right);
 }
+
 .one{
   z-index: 100;
 }
@@ -111,6 +126,73 @@
   opacity: 0.7;
   z-index: 101;
 
+}
+@media (max-width: 1200px) {
+  .step{
+    width: 280px;
+    height: 60px;
+    padding: 30px 0;
+  }
+  .step:first-child{
+    width: 280px;
+  }
+  .step::after{
+    height: 42px;
+    right: -21px;
+  }
+}
+@media (max-width: 950px) {
+  .step{
+    width: 200px;
+    height: 60px;
+    padding: 30px 0;
+    font-size: .9rem;
+  }
+  .step:first-child{
+    width: 180px;
+  }
+  /* .step::after{
+    height: 42px;
+    right: -21px;
+  } */
+  .circle{
+    width: 20px;
+  }
+}
+@media (max-width: 650px) {
+  .step{
+    flex-direction: column;
+    align-items: center;
+    /* padding-left: 40px; */
+    width: 100px;
+    height: 80px;
+    padding: 30px 0;
+    font-size: .8rem;
+  }
+  .step:first-child{
+    width: 80px;
+  }
+  .step:first-child .title{
+    padding-left: 30px;
+  }
+  .step:first-child .circle{
+    margin-left: 30px;
+  }
+  .step::after{
+    height: 57px;
+    right: -29px;
+  }
+  .circle{
+    width: 20px;
+    margin-left: 50px;
+    z-index: 1000;
+  }
+  .title{
+    width: 100%;
+    text-align: center;
+    padding-left: 50px;
+
+  }
 }
 /* .step_controls{
   border: 1px solid pink;

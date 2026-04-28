@@ -10,10 +10,15 @@
   padding: 0;
   box-sizing: border-box;
 }
+html,body{
+  overflow-x: hidden;
+  height: 100%;
+}
 body{
+  background-color: white;
   color: white;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  overflow-x: hidden;
+  width: 100vw;
 }
 :root{
   --grey: rgb(23, 23, 23);

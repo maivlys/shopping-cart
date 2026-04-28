@@ -14,6 +14,7 @@
   position: relative;
   color: var(--grey);
 }
+
 .image_container{
   /* border: 1px solid blue; */
   position: relative;
@@ -204,4 +205,42 @@
 .p{
   font-size: .78rem;
   opacity: 0.5;
+}
+@media (max-width: 600px){
+  .container{
+    height: 290px;
+  }
+  .add_btn{
+    font-size: 0.65rem;
+    padding: 0px 4px ;
+    width: 90px;
+    height: 24px;
+  }
+  .price{
+    font-size: 1rem;
+  }
+  .product_description{
+    font-size: 0.8rem;
+  }
+  .qnt_section{
+    gap: .2rem;
+    margin-left: 15px;
+  }
+  .input{
+    width: 32px;
+    padding: 8px;
+    border-radius: 4px;
+  }
+  .qnt_control{
+    width: 16px;
+    border-radius: 4px;
+  }
+  .added {
+    margin-top: 8px;
+    font-size: 1.1rem;
+  }
+  .check{
+    width: 20px;
+    margin: 0 8px 0 20px ;
+  }
 }

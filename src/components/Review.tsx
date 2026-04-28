@@ -23,19 +23,38 @@ export function Review({
 
   return (
     <div className={styles.review}>
-      <div className={`${styles.total_price_container}`}>
-        <p className={`${styles.secondary_text} `}>Celkom s DPH </p>
-        <p className={styles.total_price}>
-          {formatCurrency(
-            cartItems.reduce((total, cartItem) => {
-              const product = data.find((item) => item.id === cartItem.id);
-              return total + (product?.price || 0) * cartItem.quantity;
-            }, 0) +
-              (giftPackaging ? giftPackagingPrice : 0) +
-              (deliveryPrice ? deliveryPrice().value : 0),
-          )}{" "}
-        </p>
-      </div>
+      <section className={styles.cart_summary}>
+        {cartItems.map((p) => {
+          const product = data.find((item) => item.id === p.id);
+          if (!product) return null;
+          const selectedColor = () => {
+            if (product.colorOptions.length > 1) {
+              // const color = product.colorOptions.find((item) => item.id === product.id);
+              // console.log("TOTO->", color?.color);
+              return product.colorOptions.find((item) => item.id === product.id)
+                ?.color;
+            }
+          };
+
+          return (
+            <div className={styles.product_review}>
+              <img
+                className={styles.img}
+                src={product.imgUrl[0]}
+                alt="product-image"
+              />
+              <p className={styles.product_name}>
+                <span className={styles.qnt}> {p.quantity} x </span>
+                {product.name} - {product.description}
+              </p>
+
+              <p className={styles.price_review}>
+                {formatCurrency(p.quantity * product.price)}
+              </p>
+            </div>
+          );
+        })}
+      </section>
       {page === "delivery" ? (
         <section className={styles.summary_section}>
           <div className={styles.row}>
@@ -122,36 +141,19 @@ export function Review({
           </p>
         )}
       </div>
-      {cartItems.map((p) => {
-        const product = data.find((item) => item.id === p.id);
-        if (!product) return null;
-        const selectedColor = () => {
-          if (product.colorOptions.length > 1) {
-            // const color = product.colorOptions.find((item) => item.id === product.id);
-            // console.log("TOTO->", color?.color);
-            return product.colorOptions.find((item) => item.id === product.id)
-              ?.color;
-          }
-        };
-
-        return (
-          <div className={styles.product_review}>
-            <img
-              className={styles.img}
-              src={product.imgUrl[0]}
-              alt="product-image"
-            />
-            <p className={styles.product_name}>
-              <span className={styles.qnt}> {p.quantity} x </span>
-              {product.name} - {product.description}
-            </p>
-
-            <p className={styles.price_review}>
-              {formatCurrency(p.quantity * product.price)}
-            </p>
-          </div>
-        );
-      })}
+      <div className={`${styles.total_price_container}`}>
+        <p className={`${styles.secondary_text} `}>Celkom s DPH </p>
+        <p className={styles.total_price}>
+          {formatCurrency(
+            cartItems.reduce((total, cartItem) => {
+              const product = data.find((item) => item.id === cartItem.id);
+              return total + (product?.price || 0) * cartItem.quantity;
+            }, 0) +
+              (giftPackaging ? giftPackagingPrice : 0) +
+              (deliveryPrice ? deliveryPrice().value : 0),
+          )}{" "}
+        </p>
+      </div>
     </div>
   );
 }

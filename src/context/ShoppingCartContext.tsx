@@ -22,6 +22,8 @@ type ShoppingCartContext = {
   removeFromFavs: (id: number) => void;
   freeDeliveryPrice: number;
   giftPackagingPrice: number;
+  openCartPreview: boolean;
+  setOpenCartPreview: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -50,6 +52,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     "shopping-cart",
     [],
   );
+
+  const [openCartPreview, setOpenCartPreview] = useState(false); //cart preview on product page
 
   const freeDeliveryPrice = 49;
   const giftPackagingPrice = 1.5;
@@ -147,6 +151,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         removeFromFavs,
         freeDeliveryPrice,
         giftPackagingPrice,
+        openCartPreview,
+        setOpenCartPreview,
       }}
     >
       {children}

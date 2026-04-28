@@ -1,6 +1,6 @@
 .container{
-  border: 1px solid greenyellow;
-  transform: translateY(-100px);
+  /* border: 1px solid greenyellow; */
+  transform: translateY(-220px);
   width: 100vw;
   color: var(--grey);
   display: flex;
@@ -9,7 +9,8 @@
   align-items: center;
 }
 .main_content{
-  border: 1px pink solid;
+  /* border: 1px pink solid; */
+  /* position: relative; */
   display: flex;
   gap: 2rem;
   width: clamp(400px, 80vw, 1300px);
@@ -20,6 +21,12 @@
   justify-content: start;
   gap: 1.2rem;
   margin-top: 20px;
+}
+.images.desktop{
+  display: inline;
+}
+.images.mobile{
+  display: none;
 }
 .img_main{
   max-width: 248px;
@@ -45,9 +52,10 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 380px;
+  min-width: 320px;
+  max-width: 380px;
   padding: 20px;
-  border: 1px solid pink;
+  /* border: 1px solid pink; */
 }
 .title{
   font-size: 1.6rem;
@@ -213,10 +221,95 @@
 }
 .cart_summary{
   /* border: 1px solid rgb(0, 217, 255); */
-  width: 300px;
-  position: absolute;
+  width: 400px;
+      margin-left: auto;
+
+  /* position: absolute;
   top: 160px;
-  right: 100px;
+  right: 100px; */
+}
+@media (min-width: 2100px){
+
+  .container{
+      transform: translateY(-260px);
+  }
+}
+@media (min-width: 1601px){
+
+  .main_content{
+      transform: translateY(80px);
+  }
+
+}
+@media (max-width: 1600px){
+  .main_content{
+        transform: translateY(100px);
+    }
+}
+@media (max-width: 1300px){
+  .cart_summary{
+    position: absolute;
+    top: -140px;
+    right: -20px;
+    display: none;
+  }
+  .cart_summary.showPreview{
+    display: block;
+  }
+}
+@media (max-width: 800px){
+  .title,
+  .price{
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+  }
+  .main_content,
+  .supporting_text,
+  .color,
+  .actions_button{
+    font-size: clamp(.7rem, 1vw, .9rem);
+  }
+}
+@media (max-width: 650px){
+  .container{
+      transform: translateY(-200px);
+
+  }
+  .main_content{
+    gap: .2rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  .title{
+    height: min-content;
+  }
+  .images.desktop{
+    display: none;
+  }
+  .images.mobile{
+    max-width: 100%;
+
+    display: inline;
+    margin-bottom: 20px;
+    margin-top: -4px;
+  }
+  .mobile .wrapper{
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .img_main{
+    max-width: 148px;
+    border-radius: 60px 0;
+  }
+  .mobile .imgs_additional{
+    /* max-width: 148px; */
+    max-width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .img_small{
+    width: 48px;
+  }
 }
 .contact{
   /* margin-bottom: 2rem; */

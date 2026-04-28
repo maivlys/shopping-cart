@@ -66,125 +66,137 @@ export function Filter({
     setActiveFilter_types([]);
   }
 
+  const [filterOpen, setFilterOpen] = useState(false);
+
   return (
-    <aside className={styles.filter}>
-      <div className={styles.banner}></div>
-      <div className={styles.container}>
-        <div className={styles.filter_price}>
-          <p className={styles.title}> Cena:</p>
-          <div>
-            <input
-              className={styles.input}
-              placeholder="min"
-              type="number"
-              min={0}
-              value={priceInput.min}
-              onChange={(e) =>
-                setPriceInput((prev) => ({
-                  ...prev,
-                  min: e.target.value,
-                }))
-              }
-              onBlur={applyPriceFilter}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  applyPriceFilter();
-                }
-                if (e.key === "-" || e.key === "+" || e.key === "e")
-                  e.preventDefault();
-              }}
-            />{" "}
-            -{" "}
-            <input
-              className={styles.input}
-              placeholder="max"
-              type="number"
-              min="0"
-              value={priceInput.max}
-              onChange={(e) =>
-                setPriceInput((prev) => ({
-                  ...prev,
-                  max: e.target.value,
-                }))
-              }
-              onBlur={applyPriceFilter}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  applyPriceFilter();
-                }
-              }}
-            />
-          </div>
+    <>
+      <aside className={styles.filter}>
+        <div className={`${styles.banner} ${styles.plain}`}></div>
+        <div
+          onClick={() => setFilterOpen((prev) => !prev)}
+          className={`${styles.banner} ${styles.toggle_btn}`}
+        >
+          <p>FILTER</p> <p>{filterOpen ? "⌃" : "⌄"}</p>
         </div>
-        <div className={styles.filter_color}>
-          <p className={styles.title}> Farba:</p>
-          <div className={styles.wrapper}>
-            {filter_colors.map((item) => (
-              <button
-                onClick={() => {
-                  if (activeFilter_colors.includes(item.color)) {
-                    setActiveFilter_colors(
-                      activeFilter_colors.filter(
-                        (color) => color !== item.color,
-                      ),
-                    );
-                  } else {
-                    setActiveFilter_colors([
-                      ...activeFilter_colors,
-                      item.color,
-                    ]);
+        <div
+          className={`${styles.container} ${!filterOpen ? styles.hide : ""}`}
+        >
+          <div className={styles.filter_price}>
+            <p className={styles.title}> Cena:</p>
+            <div>
+              <input
+                className={styles.input}
+                placeholder="min"
+                type="number"
+                min={0}
+                value={priceInput.min}
+                onChange={(e) =>
+                  setPriceInput((prev) => ({
+                    ...prev,
+                    min: e.target.value,
+                  }))
+                }
+                onBlur={applyPriceFilter}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    applyPriceFilter();
+                  }
+                  if (e.key === "-" || e.key === "+" || e.key === "e")
+                    e.preventDefault();
+                }}
+              />{" "}
+              -{" "}
+              <input
+                className={styles.input}
+                placeholder="max"
+                type="number"
+                min="0"
+                value={priceInput.max}
+                onChange={(e) =>
+                  setPriceInput((prev) => ({
+                    ...prev,
+                    max: e.target.value,
+                  }))
+                }
+                onBlur={applyPriceFilter}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    applyPriceFilter();
                   }
                 }}
-                className={`${styles.filter_color_btn} ${activeFilter_colors.includes(item.color) ? styles.active : ""}`}
-                style={{ backgroundColor: item.code }}
-              >
-                {
-                  <svg
-                    className={`${styles.color_check} ${item.color === "white" && styles.white_btn}`}
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="m9 11 3 3L22 4" />
-                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-                  </svg>
-                }
-              </button>
-            ))}
+              />
+            </div>
           </div>
-        </div>
-        <div className={styles.product_type}>
-          <p className={styles.title}> Typ produktu:</p>
-          <div className={styles.wrapper}>
-            {filter_types.map((item) => (
-              <button
-                onClick={() => {
-                  if (activeFilter_types.includes(item)) {
-                    setActiveFilter_types(
-                      activeFilter_types.filter((color) => color !== item),
-                    );
-                  } else {
-                    setActiveFilter_types([...activeFilter_types, item]);
+          <div className={styles.filter_color}>
+            <p className={styles.title}> Farba:</p>
+            <div className={styles.wrapper}>
+              {filter_colors.map((item) => (
+                <button
+                  onClick={() => {
+                    if (activeFilter_colors.includes(item.color)) {
+                      setActiveFilter_colors(
+                        activeFilter_colors.filter(
+                          (color) => color !== item.color,
+                        ),
+                      );
+                    } else {
+                      setActiveFilter_colors([
+                        ...activeFilter_colors,
+                        item.color,
+                      ]);
+                    }
+                  }}
+                  className={`${styles.filter_color_btn} ${activeFilter_colors.includes(item.color) ? styles.active : ""}`}
+                  style={{ backgroundColor: item.code }}
+                >
+                  {
+                    <svg
+                      className={`${styles.color_check} ${item.color === "white" && styles.white_btn}`}
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="m9 11 3 3L22 4" />
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                    </svg>
                   }
-                }}
-                className={`${styles.filter_type_btn} ${activeFilter_types.includes(item) ? styles.active : ""}`}
-              >
-                {item === "bracelet" ? "Náramok" : null}
-                {item === "necklace" ? "Náhrdelník" : null}
-                {item === "ring" ? "Prsteň" : null}
-                {item === "earrings" ? "Náušnice" : null}
-              </button>
-            ))}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className={styles.product_type}>
+            <p className={styles.title}> Typ produktu:</p>
+            <div className={styles.wrapper}>
+              {filter_types.map((item) => (
+                <button
+                  onClick={() => {
+                    if (activeFilter_types.includes(item)) {
+                      setActiveFilter_types(
+                        activeFilter_types.filter((color) => color !== item),
+                      );
+                    } else {
+                      setActiveFilter_types([...activeFilter_types, item]);
+                    }
+                  }}
+                  className={`${styles.filter_type_btn} ${activeFilter_types.includes(item) ? styles.active : ""}`}
+                >
+                  {item === "bracelet" ? "Náramok" : null}
+                  {item === "necklace" ? "Náhrdelník" : null}
+                  {item === "ring" ? "Prsteň" : null}
+                  {item === "earrings" ? "Náušnice" : null}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className={styles.cancel_button_cnt}>
+            <button className={styles.cancel_button} onClick={cancelFilter}>
+              Zrušiť
+            </button>
           </div>
         </div>
-        <div className={styles.cancel_button_cnt}>
-          <button className={styles.cancel_button} onClick={cancelFilter}>
-            Zrušiť
-          </button>
-        </div>
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 }

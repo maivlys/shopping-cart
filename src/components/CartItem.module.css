@@ -32,7 +32,9 @@
 }
 .product_name{
   font-size: 1rem;
+  padding-right: 12px;
 }
+
 .unit_price{
   opacity: 0.8;
   font-size: 0.9rem;
@@ -123,4 +125,33 @@
   aspect-ratio: 1/1;
   object-fit: cover;
   border-radius: 10px;
+}
+
+@media (max-width: 650px){
+  .container{
+    padding: 8px;
+  }
+  .info{
+    gap: .15rem;
+  }
+  .product_name{
+    font-size: .9rem;
+  }
+  .price{
+    font-size: 1.2rem;
+  }
+  .cart_product_img{
+    width: 110px;
+  }
+  .qnt_section .input{
+    width: 16px;
+    padding: 4px;
+  }
+  .qnt_section .qnt_control{
+    width: 20px;
+  }
+  .svg_bin{
+    width: 16px;
+  }
+
 }

@@ -79,7 +79,14 @@ export function Store() {
           <p className={styles.subtitle}>Elegantné korálkové šperky</p>
         </div>
         <div className={styles.main_content}>
-          <Filter setProductsToRender={setProductsToRender} />
+          <div>
+            {/* <button>
+              <p>Filter</p>
+              <span>{filterOpen.care ? "⌃" : "⌄"}</span>
+            </button> */}
+            <Filter setProductsToRender={setProductsToRender} />
+          </div>
+
           <section className={styles.products}>
             {productsToRender.length !== 0 ? (
               productsToRender.map((item) => {

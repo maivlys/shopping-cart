@@ -3,12 +3,14 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  object-fit: cover;
   color: white;
   padding: 12px;
   /* position: fixed; */
   top: 0;
   z-index: 999;
-  width: 100vw;
+  width: 100%;
+  /* width: calc(100vw - 24px); */
   padding-bottom: 200px;
   display: flex;
   flex-direction: column;
@@ -20,7 +22,7 @@
   width: clamp(500px, 80vw, 1200px);
   text-align: center;
 }
-ul{
+.ul{
   display: flex;
   justify-content: space-between;
   gap: 12px;
@@ -30,6 +32,12 @@ ul{
 }
 .logo{
   position: relative;
+}
+.logo.mobile{
+  display: none;
+}
+.logo.desktop{
+  display: block;
 }
 .logo_circle{
   position: absolute;
@@ -50,7 +58,7 @@ ul{
   font-family: "Bumerang", sans-serif;
   font-size: 4rem;
   font-weight: 200;
-  stroke: aquamarine;
+  /* stroke: aquamarine; */
 }
 .svg{
   stroke: white;
@@ -66,6 +74,12 @@ ul{
   display: flex;
   gap: 1rem;
   height: min-content;
+}
+.left_side.mobile{
+  display: none;
+}
+.left_side.desktop{
+  display: block;
 }
 .wrapper{
   position: relative;
@@ -93,9 +107,91 @@ ul{
 .integer p{
   font-size: 0.7rem;
 }
-
+@media (min-width: 2100px) {
+  .container{
+    padding-bottom: 100px;
+    padding-top: 200px;
+    transform: translateY(-160px);
+    /* margin-bottom: 350px; */
+  }
+  .left_side.desktop{
+    display: none;
+  }
+  .left_side.mobile{
+    display: block;
+  }
+   .left_side,
+  .right_side{
+    width: min-content;
+  }
+  .logo{
+    margin-left: 120px;
+  }
+  .title{
+    font-size: 5rem;
+  }
+  .one{
+    left: 92px;
+    top: 41px;
+  }
+  .two{
+    bottom: 52px;
+    right: 33px;
+  }
+  .svg{
+    width: 30px;
+    stroke-width: 2;
+  }
+  .integer{
+    width: 20px;
+  }
+  .integer p{
+    font-size: 1rem;
+  }
+}
 @media (min-width: 1800px) {
   .container{
     padding-bottom: 250px;
+  }
+}
+@media (max-width: 700px){
+  .ul{
+    justify-content: center;
+    align-items: end;
+  }
+  .left_side{
+    display: flex;
+    justify-content: end;
+  }
+  .left_side,
+  .right_side{
+    padding-bottom: 26px;
+  }
+}
+@media (max-width: 550px){
+  .container{
+    padding-bottom: 100px;
+  }
+  .ul{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: min-content;
+  }
+  .logo.mobile{
+    display: block;
+  }
+  .logo.desktop{
+    display: none;
+  }
+  .left_side.mobile{
+    display: block;
+  }
+  .left_side.desktop{
+    display: none;
+  }
+  .left_side,
+  .right_side{
+    width: min-content;
   }
 }
