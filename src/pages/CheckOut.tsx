@@ -3,6 +3,8 @@ import styles from "./CheckOut.module.css";
 import { CartSummary } from "../components/CartSummary";
 import { Billing } from "../components/Billing";
 import { Delivery } from "../components/Delivery";
+import type { DeliveryData } from "../components/Delivery";
+import type { BillingData } from "../components/Billing";
 import { useNavigate } from "react-router-dom";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 
@@ -14,22 +16,8 @@ export function CheckOut() {
   const navigate = useNavigate();
 
   type FormData = {
-    billing: {
-      firstName: string;
-      lastName: string;
-      email: string;
-      street: string;
-      town: string;
-      psc: string;
-      phone: string;
-      giftPackaging: boolean;
-      newsletter: boolean;
-    };
-    delivery: {
-      country: string;
-      delivery: string;
-      payment: string;
-    };
+    billing: BillingData;
+    delivery: DeliveryData;
   };
   const INITIAL_DATA: FormData = {
     billing: {

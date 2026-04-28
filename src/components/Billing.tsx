@@ -42,11 +42,11 @@ const schema = z.object({
     .string()
     .transform((val) => val.replace(/\s/g, ""))
     .refine((val) => val.length === 13 && /^\+\d{12}$/.test(val)),
-  giftPackaging: z.boolean().nullish(),
+  giftPackaging: z.boolean(),
   newsletter: z.boolean().nullish(),
 });
 
-type BillingData = z.infer<typeof schema>;
+export type BillingData = z.infer<typeof schema>;
 
 type Props = {
   defaultValues: BillingData;

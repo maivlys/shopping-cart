@@ -10,12 +10,14 @@ import { useShoppingCart } from "../context/ShoppingCartContext";
 import data from "../data/data.json";
 
 const schema = z.object({
-  country: z.enum(["cz", "sk"]),
-  delivery: z.enum(["packeta-box", "packeta-home", "ppl-box", "ppl-home"]),
-  payment: z.enum(["card", "paypal", "transaction"]),
+  country: z.enum(["cz", "sk"]).or(z.literal("")),
+  delivery: z
+    .enum(["packeta-box", "packeta-home", "ppl-box", "ppl-home"])
+    .or(z.literal("")),
+  payment: z.enum(["card", "paypal", "transaction"]).or(z.literal("")),
 });
 
-type DeliveryData = z.infer<typeof schema>;
+export type DeliveryData = z.infer<typeof schema>;
 
 type Props = {
   step: string;
