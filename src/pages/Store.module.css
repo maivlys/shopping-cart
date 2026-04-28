@@ -1,5 +1,4 @@
 .container{
-  /* border: 1px solid greenyellow; */
   transform: translateY(-100px);
   width: 100vw;
   display: flex;
@@ -7,30 +6,18 @@
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  /* z-index: 1; */
 }
 .main_content{
-  /* border: 1px pink solid; */
   display: flex;
   gap: 2rem;
   width: clamp(400px, 80vw, 1300px);
 }
-
 .products{
-  /* display: flex;
-  flex-wrap: wrap; */
-  /* border: 1px solid rgb(228, 61, 89) ; */
   width: 100%;
-  /* --auto-grid-min-size: 210px; */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 230px));
-  /* justify-content: center; */
-  /* justify-content: space-evenly; */
-  /* gap: 2rem; */
   grid-gap: 1rem;
-  /* gap: 1rem; */
 }
-
 .category_wrapper{
   display: flex;
   flex-direction: column;
@@ -39,7 +26,6 @@
   margin-bottom: 40px;
   width: clamp(400px, 80vw, 1200px);
 }
-
 .p{
   font-size: 1.2rem;
   font-weight: 600;
@@ -49,7 +35,6 @@
 .category{
   font-size: 3rem;
   color: var(--purple);
-
 }
 .subtitle{
   font-size: 1.2rem;
@@ -59,16 +44,15 @@
 /* Chrome, Safari, Edge */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+  -webkit-appearance: none;     /*--- input arrows hidden*/
   margin: 0;
 }
 /* Firefox */
 input[type="number"] {
-  -moz-appearance: textfield;
+  -moz-appearance: textfield;   /*--- input arrows hidden*/
 }
 .empty_filter{
   color: var(--grey);
-  /* border: 1px solid greenyellow; */
   grid-column: 1 / -1;
   width: 100%;
   display: flex;
@@ -84,7 +68,6 @@ input[type="number"] {
 @media (min-width: 2100px) {
   .container{
       transform: translateY(-160px);
-
   }
 }
 @media (max-width: 1255px){
@@ -103,7 +86,6 @@ input[type="number"] {
 @media (max-width: 550px){
   .container{
     width: 100%;
-    /* border: 1px solid blue; */
   }
   .category_wrapper{
     width: min-content;
@@ -114,7 +96,4 @@ input[type="number"] {
   .message{
     font-size: 1rem;
   }
-  /* .container{
-    width: min-content;
-  } */
 }

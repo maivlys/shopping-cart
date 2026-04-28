@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import styles from "./CheckOut.module.css";
 import { CartSummary } from "../components/CartSummary";
 import { Billing } from "../components/Billing";
@@ -52,53 +52,12 @@ export function CheckOut() {
 
   const [formData, setFormData] = useState<FormData>(INITIAL_DATA);
 
-  console.log(formData);
-
-  // function toPrev() {
-  //   if (step === "delivery") {
-  //     setStep("billing");
-  //   } else if (step === "billing") {
-  //     setStep("cart");
-  //   } else if (step === "cart") {
-  //     navigate("/");
-  //   }
-  // }
-
-  // function toNext() {
-  //   if (step === "cart") {
-  //     setStep("billing");
-  //   } else if (step === "billing") {
-  //     setStep("delivery");
-  //   } else if (step === "delivery") {
-  //     setStep("purchase");
-  //     alert("PURCHASED");
-  //   }
-  // }
-
-  // function handleSubmit(e: MouseEvent) {
-  //   e.preventDefault();
-  // }
-
-  // function handleClick(e: MouseEvent) {
-  //   if (step === "billing" || step === "delivery") {
-  //     handleSubmit(e);
-  //   }
-  //   toNext();
-  // }
-
   function finishProcess() {
-    // alert("done");
-    console.log("data sent", formData);
     navigate("/");
-
     setFormData(INITIAL_DATA);
     setCartItems([]);
     setStep("cart");
   }
-
-  useEffect(() => {
-    console.log("FORM DATA FROM STATE---", formData);
-  }, [formData]);
 
   return (
     <div
@@ -137,14 +96,13 @@ export function CheckOut() {
         </div>
       </section>
       {step === "cart" ? (
-        <CartSummary setStep={setStep} />
+        <CartSummary variant="big" setStep={setStep} />
       ) : step === "billing" ? (
         <Billing
           defaultValues={formData.billing}
           onUpdateBilling={(billing) =>
             setFormData((prev) => ({ ...prev, billing }))
           }
-          // giftPackagingPrice={giftPackagingPrice}
           setStep={setStep}
         />
       ) : (
@@ -155,22 +113,10 @@ export function CheckOut() {
             setFormData((prev) => ({ ...prev, delivery }))
           }
           giftPackaging={formData.billing.giftPackaging}
-          // giftPackagingPrice={giftPackagingPrice}
           finishProcess={finishProcess}
           setStep={setStep}
         />
       )}
-      {/* <section className={styles.step_controls}>
-        <button className={styles.step_controls__prev} onClick={toPrev}>
-          back
-        </button>
-        <button
-          className={styles.step_controls__next}
-          onClick={(e) => handleClick(e)}
-        >
-          next
-        </button>
-      </section> */}
     </div>
   );
 }

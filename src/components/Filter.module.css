@@ -1,7 +1,6 @@
 .filter{
   flex-shrink: 0;
   width: 250px;
-  /* height: 380px; */
   border-radius: 8px;
   color: var(--grey);
   position: relative;
@@ -29,27 +28,6 @@
   display: none;
   color: white;
   cursor: pointer;
-}
-@media (max-width: 1255px){
-  .container{
-    /* display: none; */
-    position: absolute;
-    z-index: 100;
-
-  }
-  .container.hide{
-    display: none;
-  }
-  .banner.toggle_btn{
-    display: block;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 12px;
-  }
-  .banner.plain{
-    display: none;
-  }
 }
 .title{
   font-weight:500;
@@ -152,5 +130,24 @@
 }
 .cancel_button_cnt{
   justify-self: end;
+}
+@media (max-width: 1255px){
+  .container{
+    position: absolute;
+    z-index: 100;
 
+  }
+  .container.hide{
+    display: none;
+  }
+  .banner.toggle_btn{
+    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px;
+  }
+  .banner.plain{
+    display: none;
+  }
 }

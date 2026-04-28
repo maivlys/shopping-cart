@@ -6,11 +6,9 @@
   object-fit: cover;
   color: white;
   padding: 12px;
-  /* position: fixed; */
   top: 0;
   z-index: 999;
   width: 100%;
-  /* width: calc(100vw - 24px); */
   padding-bottom: 200px;
   display: flex;
   flex-direction: column;
@@ -58,7 +56,6 @@
   font-family: "Bumerang", sans-serif;
   font-size: 4rem;
   font-weight: 200;
-  /* stroke: aquamarine; */
 }
 .svg{
   stroke: white;
@@ -98,7 +95,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   color: white;
   position: absolute;
   bottom: 0;
@@ -112,7 +108,6 @@
     padding-bottom: 100px;
     padding-top: 200px;
     transform: translateY(-160px);
-    /* margin-bottom: 350px; */
   }
   .left_side.desktop{
     display: none;

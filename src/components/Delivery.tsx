@@ -9,12 +9,19 @@ import { PurchaseConfirmationModal } from "./PurchaseConfirmationModal";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import data from "../data/data.json";
 
+const schema = z.object({
+  country: z.enum(["cz", "sk"]),
+  delivery: z.enum(["packeta-box", "packeta-home", "ppl-box", "ppl-home"]),
+  payment: z.enum(["card", "paypal", "transaction"]),
+});
+
+type DeliveryData = z.infer<typeof schema>;
+
 type Props = {
   step: string;
   defaultValues: DeliveryData;
   onUpdateDelivery: (data: DeliveryData) => void;
   giftPackaging: boolean;
-  // giftPackagingPrice: number;
   setStep: React.Dispatch<React.SetStateAction<string>>;
   finishProcess: () => void;
 };
@@ -24,11 +31,10 @@ export function Delivery({
   defaultValues,
   onUpdateDelivery,
   giftPackaging,
-  // giftPackagingPrice,
   setStep,
   finishProcess,
 }: Props) {
-  const { cartItems, giftPackagingPrice } = useShoppingCart();
+  const { cartItems } = useShoppingCart();
   const [deliveryTo, setDeliveryTo] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
@@ -38,14 +44,6 @@ export function Delivery({
   }, 0);
 
   const isFree = Number(totalPrice.toFixed(2)) >= 49;
-
-  const schema = z.object({
-    country: z.enum(["cz", "sk"]),
-    delivery: z.enum(["packeta-box", "packeta-home", "ppl-box", "ppl-home"]),
-    payment: z.enum(["card", "paypal", "transaction"]),
-  });
-
-  type DeliveryData = z.infer<typeof schema>;
 
   const {
     register,
@@ -58,23 +56,12 @@ export function Delivery({
   });
 
   function submitData(data: DeliveryData) {
-    console.log("clicked");
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 1300);
     onUpdateDelivery(data);
     setStep("purchase");
-    // alert("purchased");
-    // finishProcess();
-
-    // if (!termsRef.current?.checked) {
-    //   setTermsError(true);
-    //   return;
-    // }
-    // const finalData = { ...data, newsletter: data.newsletter ?? false };
-
-    // setStep("delivery");
   }
 
   const selectedDelivery = watch("delivery");
@@ -156,9 +143,6 @@ export function Delivery({
                   Slovensko{" "}
                 </label>
               </div>
-              {/* {errors.country && (
-                <span style={{ color: "red" }}>Vyberte možnosť</span>
-              )} */}
             </section>
             <section className={styles.form_section}>
               <p
@@ -256,9 +240,6 @@ export function Delivery({
                       : formatCurrency(6.99)}
                 </p>
               </div>
-              {/* {errors.delivery && (
-                <span style={{ color: "red" }}>Vyberte možnosť</span>
-              )} */}
             </section>
             <section className={styles.form_section}>
               <p
@@ -315,9 +296,6 @@ export function Delivery({
                 </label>
                 <p className={styles.price}>zdarma</p>
               </div>
-              {/* {errors.payment && (
-                <span style={{ color: "red" }}>Vyberte možnosť</span>
-              )} */}
             </section>
           </div>
           <div>
@@ -328,60 +306,6 @@ export function Delivery({
               selectedDelivery={selectedDelivery}
               selectedPayment={selectedPayment}
             />
-            {/* <div> */}
-            {/* <div>
-                <p>Doprava: </p>
-                {selectedDelivery === "packeta-box" && (
-                  <>
-                    {" "}
-                    <p>Packeta - Z-BOX</p>
-                    <p>{deliveryPrice().label}</p>
-                  </>
-                )}
-                {selectedDelivery === "packeta-home" && (
-                  <>
-                    <p>Packeta - kuriér</p>
-                    <p>{deliveryPrice().label}</p>
-                  </>
-                )}
-                {selectedDelivery === "ppl-box" && (
-                  <>
-                    <p>PPL - Parcelbox</p>
-                    <p>{deliveryPrice().label}</p>
-                  </>
-                )}
-                {selectedDelivery === "ppl-home" && (
-                  <>
-                    <p>PPL - kuriér</p>
-                    <p>{deliveryPrice().label}</p>
-                  </>
-                )}
-              </div> */}
-            {/* <div>
-                <p>Platba:</p>
-                {selectedPayment === "card" && <p>Kartou online</p>}
-                {selectedPayment === "paypal" && <p>PayPal</p>}
-                {selectedPayment === "transaction" && <p>Bankový prevod</p>}
-              </div>{" "} */}
-            {/* {giftPackaging && (
-                <p>+ Darčekové balenie {formatCurrency(giftPackagingPrice)}</p>
-              )} */}
-            {/* </div> */}
-            {/* <div>
-              <p>
-                Celkom s DPH{" "}
-                {formatCurrency(
-                  cartItems.reduce((total, cartItem) => {
-                    const product = data.find(
-                      (item) => item.id === cartItem.id,
-                    );
-                    return total + (product?.price || 0) * cartItem.quantity;
-                  }, 0) +
-                    (giftPackaging ? giftPackagingPrice : 0) +
-                    deliveryPrice().value,
-                )}{" "}
-              </p>
-            </div> */}
 
             <section className={styles.step_controls}>
               <button
@@ -399,7 +323,7 @@ export function Delivery({
             <PurchaseConfirmationModal
               finishProcess={finishProcess}
               loading={loading}
-              setLoading={setLoading}
+              // setLoading={setLoading}
             />
           )}
         </div>

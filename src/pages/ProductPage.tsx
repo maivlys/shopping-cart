@@ -6,7 +6,6 @@ import { formatCurrency } from "../utilities/formatCurrency";
 import { useEffect, useState } from "react";
 import { CartSummary } from "../components/CartSummary";
 import { ImageModal } from "../components/ImageModal";
-import { QuickBuyModal } from "../components/QuickBuyModal";
 
 type Product = {
   id: number;
@@ -55,7 +54,6 @@ export function ProductPage() {
   const productQntInCart = cartItems.find(
     (item) => item.id === product.id,
   )?.quantity;
-  // console.log(product);
 
   const [isImgOpen, setIsImgOpen] = useState<boolean>(false);
   const [productToOpen, setProductToOpen] = useState<string[]>([]);
@@ -63,19 +61,7 @@ export function ProductPage() {
 
   const inCart = isInCart(product.id);
 
-  // const [selectedColor, setSelectedColor] = useState<string>("");
-
-  // useEffect(() => {
-  //   product.colorSelected = selectedColor;
-  // }, [selectedColor]);
-
-  // useEffect(() => {
-  //   console.log("updated", key);
-  // }, [key]);
-
   function openModal(src: string[], key: number) {
-    // console.log("key-------", key);
-
     setKey(key);
     setProductToOpen(src);
     setIsImgOpen(true);
@@ -86,8 +72,6 @@ export function ProductPage() {
       setQntInput("1");
     }
   }, [inCart]);
-
-  // setOpenCartPreview(false);
 
   return (
     <div className={styles.container}>
@@ -100,7 +84,7 @@ export function ProductPage() {
             alt="main-product-picture"
           />
           <div className={styles.imgs_additional}>
-            {product.imgUrl.map((item, i) => {
+            {product.imgUrl.map((_item, i) => {
               if (i === 0) {
                 return null;
               }
@@ -137,7 +121,7 @@ export function ProductPage() {
             </div>
 
             <div className={styles.imgs_additional}>
-              {product.imgUrl.map((item, i) => {
+              {product.imgUrl.map((_item, i) => {
                 if (i === 0) {
                   return null;
                 }
@@ -172,9 +156,6 @@ export function ProductPage() {
                     key={item.id}
                     onClick={() => {
                       navigate(`/product/${item.id}`);
-                      // setSelectedColor(item);
-                      // product.colorSelected = item;
-                      // console.log(product);
                     }}
                     className={`${styles.color} ${product.id === item.id ? styles.selected : null}`}
                   >
@@ -185,7 +166,6 @@ export function ProductPage() {
             </div>
           )}
 
-          {/* <div className={styles.quantity}> */}
           <div className={styles.qnt_section}>
             <button
               className={styles.qnt_control}
@@ -200,7 +180,6 @@ export function ProductPage() {
                   });
                 } else {
                   decreaseQnt(product.id);
-                  // setQntInput("1");
                 }
               }}
             >
@@ -226,9 +205,7 @@ export function ProductPage() {
               +
             </button>
           </div>
-          {/* </div> */}
           <div className={styles.actions}>
-            {/* {!inCart ? ( */}
             <button
               className={`${styles.actions_button} ${styles.add_button}`}
               disabled={inCart}
@@ -236,7 +213,6 @@ export function ProductPage() {
             >
               {inCart ? "V košíku" : "Vložiť do košíka"}
             </button>
-            {/* // ) : null} */}
 
             <button
               onClick={() => {
@@ -252,19 +228,6 @@ export function ProductPage() {
               {isFav(product.id)
                 ? "Odstrániť z obľúbených"
                 : "Pridať do obľúbených"}
-              {/* <svg
-                width={25}
-                height={25}
-                fill="none"
-                stroke="#000000"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-              </svg> */}
             </button>
           </div>
           <div className={styles.details_grid}>
@@ -310,27 +273,11 @@ export function ProductPage() {
             >
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
             </svg>
-            {/* {isCopied ? ( */}
             <span
               className={`${styles.confirmation} ${isCopied ? styles.show : ""}`}
             >
-              {/* <svg
-                  width={25}
-                  height={25}
-                  fill="none"
-                  stroke="#ffffff"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M20 6 9 17l-5-5" />
-                </svg> */}
               email bol skopírovaný
-              {/* do schránky */}
             </span>
-            {/* ) : null} */}
           </div>
           <div className={styles.additional_info}>
             <div className={styles.additional_info_section}>

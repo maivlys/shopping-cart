@@ -7,7 +7,6 @@ type ModalProps = {
   onClose: () => void;
   productToOpen: string[];
   clickedImgIndex?: number;
-  // imgUrl: string[];
 };
 
 export function ImageModal({
@@ -15,14 +14,8 @@ export function ImageModal({
   onClose,
   productToOpen,
   clickedImgIndex,
-  // imgUrl,
 }: ModalProps) {
   if (!isOpen) return null;
-
-  // const root = document.getElementById("modal-root");
-  // if (!root) return null;
-
-  // const [displayedImg, setDisplayedImg] = useState<string>("");
 
   const [imgToDisplay, setImgToDisplay] = useState<number>(
     clickedImgIndex || 0,
@@ -40,7 +33,6 @@ export function ImageModal({
     };
 
     window.addEventListener("keydown", handleAction);
-    console.log("key---", clickedImgIndex);
 
     return () => {
       window.removeEventListener("keydown", handleAction);
@@ -85,13 +77,9 @@ export function ImageModal({
   }
 
   return createPortal(
-    <div
-      className={styles.overlay}
-      // onKeyDown={(e) => e.key === "Escape" && onClose()} - cant be used cause div is not focusable - useEffect is a better solution than tabIndex={0} (makes div focusable)
-    >
+    <div className={styles.overlay}>
       <span className={styles.container}>
         <button onClick={handleClick} className={styles.close_btn}>
-          {/* x */}
           <svg
             className={styles.svg}
             width={25}
@@ -110,7 +98,6 @@ export function ImageModal({
           </svg>
         </button>
         <button onClick={showPreviousImg} className={styles.prev_btn}>
-          {/* {"<"} */}
           <svg
             className={styles.svg}
             fill="none"
@@ -131,7 +118,6 @@ export function ImageModal({
           alt="product-detail"
         />
         <button onClick={showNextImg} className={styles.next_btn}>
-          {/* {">"} */}
           <svg
             className={styles.svg}
             fill="none"

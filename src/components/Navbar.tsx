@@ -97,11 +97,6 @@ export function Navbar() {
                 if (!isAllowedHover) return;
                 setOpenCartPreview(true);
               }}
-              // onMouseLeave={() => {
-              //   setTimeout(() => {
-              //     setOpenCartPreview(false);
-              //   }, 2500);
-              // }}
               className={styles.wrapper}
             >
               <svg
@@ -118,18 +113,7 @@ export function Navbar() {
                 />
                 <path d="M7.5 8.25v-1.5a4.5 4.5 0 0 1 4.5-4.5v0a4.5 4.5 0 0 1 4.5 4.5v1.5" />
               </svg>
-              {/* <svg
-                className={styles.svg}
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M9 20a1 1 0 1 0 0 2 1 1 0 1 0 0-2z" />
-                <path d="M20 20a1 1 0 1 0 0 2 1 1 0 1 0 0-2z" />
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-              </svg>{" "} */}
+
               <div className={styles.integer}>
                 <p>{getTotalQnt()}</p>
               </div>

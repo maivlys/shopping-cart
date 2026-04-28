@@ -5,7 +5,6 @@
   color: var(--grey);
 }
 .container{
-  /* border: 1px solid yellow; */
   width: clamp(400px, 80%, 1000px);
   padding: 20px;
   display: flex;
@@ -14,7 +13,6 @@
 }
 .billing_info{
   border: 1px solid var(--grey-medium);
-  /* opacity: 0.5; */
   padding: 20px;
   border-radius: 12px;
   display: flex;
@@ -22,13 +20,11 @@
   gap: 1rem;
   max-height: 580px;
   min-width: 340px;
-  /* width: clamp(400px, 80%, 1000px); */
 }
 .form_section{
   display: flex;
   flex-direction: column;
   gap: .2rem;
-  /* border: 1px solid blue; */
 }
 .title{
   font-size: 1.1rem;
@@ -44,7 +40,6 @@
   color: var(--grey);
   opacity: 0.8;
   font-size: 0.9rem;
-  /* border: 1px solid rgb(195, 0, 255); */
 }
 .star{
   color: var(--pink);
@@ -52,21 +47,16 @@
   font-weight: 600;
 }
 .input{
-  /* border: 1px solid rgb(0, 255, 47); */
   outline: none;
   border: 1px solid var(--grey-medium);
   background-color: white;
   width: 100%;
   padding: 8px;
   border-radius: 4px;
-  /* color: var(--pink); */
   color: var(--grey);
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  /* opacity: 0.8; */
 }
 .empty{
-  /* border: 1px solid var(--grey-medium); */
-  /* border: 2px solid var(--pink); */
   background-color: var(--pink);
   opacity: 0.2;
 }
@@ -76,7 +66,6 @@
 }
 .input_container{
   border: 1px solid var(--grey-medium);
-  /* display: flex; */
   padding: 8px;
   border-radius: 4px;
   align-items: center;
@@ -86,14 +75,12 @@
 .gift_section .label{
   font-size: .9rem;
   cursor: pointer;
-
 }
 .gift_checkbox{
   accent-color: var(--pink-input);
   margin-right: 4px;
   width: 12px;
   cursor: pointer;
-
 }
 .gift_price{
   position: absolute;
@@ -101,8 +88,6 @@
   display: inline;
   margin-left: auto;
   font-weight: 600;
-
-  /* opacity: 0.6; */
   font-size: .9rem;
   color: var(--pink);
 }
@@ -121,14 +106,8 @@
   cursor: pointer;
 }
 .terms_error{
-  /* color: red; */
   font-weight: bold;
-  /* color: var(--pink); */
 }
-/* .empty{
-  border: 2px solid red;
-  background-color: red;
-} */
 .step_controls{
   width: clamp(400px, 80%, 1000px);
   padding: 20px;

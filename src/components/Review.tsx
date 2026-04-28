@@ -19,7 +19,6 @@ export function Review({
   selectedPayment,
 }: Props) {
   const { cartItems, giftPackagingPrice } = useShoppingCart();
-  // console.log(typeof formatCurrency(4));
 
   return (
     <div className={styles.review}>
@@ -27,22 +26,14 @@ export function Review({
         {cartItems.map((p) => {
           const product = data.find((item) => item.id === p.id);
           if (!product) return null;
-          const selectedColor = () => {
-            if (product.colorOptions.length > 1) {
-              // const color = product.colorOptions.find((item) => item.id === product.id);
-              // console.log("TOTO->", color?.color);
-              return product.colorOptions.find((item) => item.id === product.id)
-                ?.color;
-            }
-          };
 
           return (
             <div className={styles.product_review}>
-              <img
+              {/* <img
                 className={styles.img}
                 src={product.imgUrl[0]}
                 alt="product-image"
-              />
+              /> */}
               <p className={styles.product_name}>
                 <span className={styles.qnt}> {p.quantity} x </span>
                 {product.name} - {product.description}

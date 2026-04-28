@@ -2,7 +2,6 @@ import data from "../data/data.json";
 import styles from "./CartItem.module.css";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { useShoppingCart } from "../context/ShoppingCartContext";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type CartItemProps = {
@@ -20,15 +19,9 @@ export function CartItem({ id, quantity, variant }: CartItemProps) {
 
   const selectedColor = () => {
     if (product.colorOptions.length > 1) {
-      // const color = product.colorOptions.find((item) => item.id === product.id);
-      // console.log("TOTO->", color?.color);
       return product.colorOptions.find((item) => item.id === product.id)?.color;
     }
   };
-
-  // console.log(product.description);
-
-  // selectedColor();
 
   return (
     <div
@@ -59,7 +52,6 @@ export function CartItem({ id, quantity, variant }: CartItemProps) {
               : product.description.includes("-")
                 ? `- ${selectedColor()}`
                 : null}
-            {/* {product.description.includes("-") ? `- ${selectedColor()}` : ""} */}
           </p>
           <p className={styles.unit_price}>
             {formatCurrency(product.price)} /ks

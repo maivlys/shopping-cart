@@ -1,6 +1,4 @@
-import { createPortal } from "react-dom";
 import styles from "./PurchaseConfirmationModal.module.css";
-import { useEffect, useRef, useState } from "react";
 
 type ModalProps = {
   finishProcess: () => void;
@@ -10,10 +8,7 @@ type ModalProps = {
 export function PurchaseConfirmationModal({
   finishProcess,
   loading,
-  setLoading,
 }: ModalProps) {
-  // setLoading(true);
-
   return (
     <>
       <div className={styles.overlay}>

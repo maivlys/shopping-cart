@@ -3,10 +3,8 @@
   display: flex;
   justify-content: center;
   color: var(--grey);
-  /* border: 1px solid blue; */
 }
 .container{
-  /* border: 1px solid yellow; */
   width: clamp(400px, 80%, 1000px);
   padding: 20px;
   display: flex;
@@ -28,7 +26,6 @@
   display: flex;
   flex-direction: column;
   gap: .2rem;
-  /* border: 1px solid blue; */
 }
 .title{
   font-weight: 600;
@@ -37,17 +34,13 @@
 }
 .input_container{
   border: 1px solid var(--grey-medium);
-  /* display: flex; */
   padding: 8px;
   border-radius: 4px;
   align-items: center;
   gap: .8rem;
   position: relative;
 }
-/* .empty{
-  border: 2px solid var(--pink);
-} */
- .empty{
+.empty{
   color: var(--pink);
  }
 .input{
@@ -55,28 +48,12 @@
   accent-color: var(--pink-input);
   cursor: pointer;
 }
-
-/* input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  border: 2px solid #999;
-  border-radius: 4px;
-}
-input[type="checkbox"]:checked {
-  background: #4caf50;
-  border-color: #4caf50;
-}
-input[type="checkbox"]:checked::after {
-  content: "";
-} */
 .price{
   position: absolute;
   right: 4px;
   display: inline;
   margin-left: auto;
   font-weight: 600;
-
-  /* opacity: 0.6; */
   font-size: .9rem;
   color: var(--pink);
 }
@@ -86,7 +63,6 @@ input[type="checkbox"]:checked::after {
   opacity: 0.8;
   font-size: 0.9rem;
   cursor: pointer;
-  /* border: 1px solid rgb(195, 0, 255); */
 }
 .step_controls{
   width: clamp(400px, 80%, 1000px);

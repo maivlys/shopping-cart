@@ -1,5 +1,4 @@
 .container{
-  /* border: 1px solid aqua; */
   display: flex;
   justify-content: space-between;
   background-color: white;
@@ -9,8 +8,6 @@
 }
 .product_review{
   display: flex;
-  /* border: 1px solid greenyellow; */
-
 }
 .cart_product_img{
   width: 130px;
@@ -34,7 +31,6 @@
   font-size: 1rem;
   padding-right: 12px;
 }
-
 .unit_price{
   opacity: 0.8;
   font-size: 0.9rem;
@@ -48,11 +44,8 @@
   justify-content: start;
   gap: .3rem;
   width: min-content;
-  /* margin-left: 24px; */
   border: 1px solid rgb(190, 190, 190);
-
   border-radius: 2px;
-  /* position: absolute; */
 }
 .qnt_section.mini .input{
   width: 16px;
@@ -68,7 +61,6 @@
   text-align: center;
   padding: 8px;
   border-radius: 12px;
-  /* box-shadow: var(--shadow); */
   color: var(--grey);
   opacity: 0.8;
 }
@@ -80,13 +72,10 @@
   aspect-ratio: 1/1;
   border-radius: 4px;
   cursor: pointer;
-  /* opacity: 1; */
-  /* box-shadow: var(--shadow); */
   transition: all 0.2s ease;
   font-size: 0.8rem;
 }
 .price{
-  /* border: 1px solid yellow; */
   text-align: right;
   font-size: 1.5rem;
   color: var(--purple);
@@ -117,8 +106,6 @@
   display: flex;
   border-radius: 12px;
   padding: 12px
-  /* justify-content: space-between; */
-  /* width: 100%; */
 }
 .cart_product_img.mini{
   width: 90px;
@@ -153,5 +140,4 @@
   .svg_bin{
     width: 16px;
   }
-
 }

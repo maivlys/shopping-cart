@@ -21,15 +21,7 @@ type ProductItemProps = {
   page: string;
 };
 
-export function StoreProduct({
-  product,
-  page,
-  // id,
-  // name,
-  // description,
-  // price,
-  // imgUrl,
-}: ProductItemProps) {
+export function StoreProduct({ product, page }: ProductItemProps) {
   const {
     increaseQnt,
     decreaseQnt,
@@ -41,16 +33,12 @@ export function StoreProduct({
   } = useShoppingCart();
   const navigate = useNavigate();
 
-  // const [qntInput, setQntInput] = useState<string>("1");
-
   const [addedInfo, setAddedInfo] = useState<boolean>(false);
   const isStorePage = page === "store";
 
   const productQnt = cartItems.find((p) => p.id === product.id)?.quantity;
 
   function handleClick(id: number) {
-    console.log(isFav(id));
-
     if (isFav(id)) {
       removeFromFavs(id);
     } else {
@@ -150,7 +138,6 @@ export function StoreProduct({
                 readOnly
                 type="text"
                 value={productQnt}
-                // onChange={(e) => setQntInput(e.target.value)}
               />
               <button
                 className={styles.qnt_control}

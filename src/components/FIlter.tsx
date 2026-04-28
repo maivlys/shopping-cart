@@ -3,24 +3,13 @@ import { useState, useEffect } from "react";
 import data from "../data/data.json";
 import filter_colors from "../data/filter_colors.json";
 import filter_types from "../data/filter_types.json";
+import type { Product } from "../types/Product";
 
 type Props = {
-  setProductsToRender: () => void;
+  setProductsToRender: React.Dispatch<React.SetStateAction<Product[]>>;
 };
 
-export function Filter({
-  // priceInput,
-  // setPriceInput,
-  // applyPriceFilter,
-  // filter_colors,
-  // activeFilter_colors,
-  // setActiveFilter_colors,
-  // filter_types,
-  // activeFilter_types,
-  // setActiveFilter_types,
-  // cancelFilter,
-  setProductsToRender,
-}: Props) {
+export function Filter({ setProductsToRender }: Props) {
   const [activeFilter_price, setActiveFilter_price] = useState<{
     min: number;
     max: number;
@@ -34,7 +23,6 @@ export function Filter({
 
   useEffect(() => {
     const filteredData = data.filter((item) => {
-      console.log(activeFilter_price);
       const priceMatch =
         activeFilter_price.min < item.price &&
         activeFilter_price.max > item.price;

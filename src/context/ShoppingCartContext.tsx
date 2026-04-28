@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 type ShoppingCartContext = {
@@ -41,26 +35,16 @@ type CartItem = {
   quantity: number;
 };
 
-// type FavProduct = {
-//   id: number;
-//   name: string;
-//   imgUrl: string;
-// };
-
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
-  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
-    "shopping-cart",
-    [],
-  );
-
   const [openCartPreview, setOpenCartPreview] = useState(false); //cart preview on product page
 
   const freeDeliveryPrice = 49;
   const giftPackagingPrice = 1.5;
 
-  useEffect(() => {
-    console.log(cartItems);
-  }, [cartItems]);
+  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
+    "shopping-cart",
+    [],
+  );
 
   function getQnt(id: number) {
     return cartItems.find((item) => item.id === id)?.quantity || 0;
@@ -80,7 +64,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         });
       }
     });
-    console.log(cartItems);
   }
 
   function decreaseQnt(id: number) {
@@ -106,8 +89,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   }
 
   function getTotalQnt(): number {
-    console.log("cartItems-->", cartItems);
-
     return cartItems.reduce((total, item) => total + item.quantity, 0);
   }
 
@@ -117,19 +98,15 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
   const [favs, setFavs] = useLocalStorage<number[]>("favProducts", []);
 
-  useEffect(() => {
-    console.log(favs);
-  }, [favs]);
-
   function isFav(id: number) {
     return favs.some((item) => item === id);
   }
 
-  function addToFavs(id) {
+  function addToFavs(id: number) {
     setFavs((prev) => [...prev, id]);
   }
 
-  function removeFromFavs(id) {
+  function removeFromFavs(id: number) {
     const filtered = favs.filter((item) => item !== id);
     setFavs(filtered);
   }

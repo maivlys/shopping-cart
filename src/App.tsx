@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Navbar } from "./components/Navbar";
 import { Store } from "./pages/Store";
 import { ProductPage } from "./pages/ProductPage";

@@ -1,96 +1,66 @@
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import styles from "./Billing.module.css";
 import { Review } from "./Review";
-import data from "../data/data.json";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useEffect, useRef, useState } from "react";
 
+const schema = z.object({
+  firstName: z
+    .string()
+    .min(1, "Required")
+    .transform((val) =>
+      val.length > 0 ? val[0].toUpperCase() + val.slice(1) : val,
+    ),
+  lastName: z
+    .string()
+    .min(1, "Required")
+    .transform((val) =>
+      val.length > 0 ? val[0].toUpperCase() + val.slice(1) : val,
+    ),
+  email: z.email(),
+  street: z
+    .string()
+    .min(1, "Required")
+    .transform((val) =>
+      val.length > 0 ? val[0].toUpperCase() + val.slice(1) : val,
+    ),
+  town: z
+    .string()
+    .min(1, "Required")
+    .transform((val) =>
+      val.length > 0 ? val[0].toUpperCase() + val.slice(1) : val,
+    ),
+  psc: z
+    .string()
+    .refine(
+      (val) => val.replace(/\s/g, "").length === 5 && /^\d[\d\s]*\d$/.test(val),
+    ),
+  phone: z
+    .string()
+    .transform((val) => val.replace(/\s/g, ""))
+    .refine((val) => val.length === 13 && /^\+\d{12}$/.test(val)),
+  giftPackaging: z.boolean().nullish(),
+  newsletter: z.boolean().nullish(),
+});
+
+type BillingData = z.infer<typeof schema>;
+
 type Props = {
   defaultValues: BillingData;
   onUpdateBilling: (data: BillingData) => void;
-  // giftPackagingPrice: number;
   setStep: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export function Billing({
-  defaultValues,
-  onUpdateBilling,
-  // giftPackagingPrice,
-  setStep,
-}: Props) {
-  const { cartItems, giftPackagingPrice } = useShoppingCart();
+export function Billing({ defaultValues, onUpdateBilling, setStep }: Props) {
+  const { giftPackagingPrice } = useShoppingCart();
 
   const termsRef = useRef<HTMLInputElement>(null);
   const [termsError, setTermsError] = useState(false);
 
   const [giftPackaging, setGiftPackaging] = useState(false);
-
-  // const navigate = useNavigate();
-  const schema = z.object({
-    firstName: z
-      .string()
-      .min(1, "Required")
-      .transform((val) =>
-        val.length > 0 ? val[0].toUpperCase() + val.slice(1) : val,
-      ),
-    lastName: z
-      .string()
-      .min(1, "Required")
-      .transform((val) =>
-        val.length > 0 ? val[0].toUpperCase() + val.slice(1) : val,
-      ),
-    email: z.email(),
-    street: z
-      .string()
-      .min(1, "Required")
-      .transform((val) =>
-        val.length > 0 ? val[0].toUpperCase() + val.slice(1) : val,
-      ),
-    town: z
-      .string()
-      .min(1, "Required")
-      .transform((val) =>
-        val.length > 0 ? val[0].toUpperCase() + val.slice(1) : val,
-      ),
-    psc: z
-      .string()
-      .refine(
-        (val) =>
-          val.replace(/\s/g, "").length === 5 && /^\d[\d\s]*\d$/.test(val),
-      ),
-    phone: z
-      .string()
-      .transform((val) => val.replace(/\s/g, ""))
-      .refine((val) => val.length === 13 && /^\+\d{12}$/.test(val)),
-    // giftPackaging: z.enum(["free", "gift"]),
-    giftPackaging: z.boolean().nullish(),
-    newsletter: z.boolean().nullish(),
-  });
-
-  // const schema = z.object({
-  //   billing: {
-  //     firstName: z.string(),
-  //     lastName: z.string(),
-  //     email: z.email(),
-  //     street: z.string(),
-  //     town: z.string(),
-  //     psc: z.string(),
-  //     phone: z.string(),
-  //     giftPackaging: z.boolean().nullish(),
-  //   },
-  //   delivery: {
-  //     country: z.string(),
-  //     delivery: z.string(),
-  //     payment: z.string(),
-  //   },
-  // });
-
-  type BillingData = z.infer<typeof schema>;
-
-  // const onSubmit: SubmitHandler<FormFields> = (data) => {};
 
   const {
     register,
@@ -100,10 +70,6 @@ export function Billing({
   } = useForm<BillingData>({
     resolver: zodResolver(schema),
   });
-
-  // useEffect(() => {
-  //   console.log(termsRef.current?.checked);
-  // }, [termsRef]);
 
   function submitData(data: BillingData) {
     if (!termsRef.current?.checked) {
@@ -128,8 +94,6 @@ export function Billing({
       <form className={styles.form} onSubmit={handleSubmit(submitData)}>
         <div className={styles.container}>
           <div className={`${styles.billing_info} ${styles.left_side}`}>
-            {/* <form action="submit" onSubmit={handleSubmit}> */}
-
             <section className={styles.form_section}>
               <p className={styles.title}>Dodacie a fakturačné údaje</p>
               <div className={styles.input_group}>
@@ -139,16 +103,9 @@ export function Billing({
                 <input
                   className={`${styles.input} ${errors.firstName ? styles.empty : null}`}
                   {...register("firstName")}
-                  // value={defaultValues.firstName}
                   type="text"
                   id="name"
                 />
-                {/* {errors.firstName && (
-                  <span style={{ color: "red" }}>
-                    {" "}
-                    {errors.firstName.message}
-                  </span>
-                )} */}
               </div>
               <div className={styles.input_group}>
                 <label className={styles.label} htmlFor="name">
@@ -160,12 +117,6 @@ export function Billing({
                   type="text"
                   id="name"
                 />
-                {/* {errors.lastName && (
-                  <span style={{ color: "red" }}>
-                    {" "}
-                    {errors.lastName.message}
-                  </span>
-                )} */}
               </div>
               <div className={styles.input_group}>
                 <label className={styles.label} htmlFor="email">
@@ -177,9 +128,6 @@ export function Billing({
                   type="email"
                   id="email"
                 />
-                {/* {errors.email && (
-                  <span style={{ color: "red" }}> {errors.email.message}</span>
-                )} */}
               </div>
               <div className={styles.input_group}>
                 <label className={styles.label} htmlFor="street">
@@ -191,9 +139,6 @@ export function Billing({
                   type="text"
                   id="street"
                 />
-                {/* {errors.street && (
-                  <span style={{ color: "red" }}> {errors.street.message}</span>
-                )} */}
               </div>
               <div className={styles.input_group}>
                 <label className={styles.label} htmlFor="town">
@@ -205,9 +150,6 @@ export function Billing({
                   type="text"
                   id="town"
                 />
-                {/* {errors.town && (
-                  <span style={{ color: "red" }}> {errors.town.message}</span>
-                )} */}
               </div>
               <div className={styles.input_group}>
                 <label className={styles.label} htmlFor="post-code">
@@ -220,9 +162,6 @@ export function Billing({
                   type="text"
                   id="post-code"
                 />
-                {/* {errors.psc && (
-                  <span style={{ color: "red" }}> expected form: 000 00</span>
-                )} */}
               </div>
               <div className={styles.input_group}>
                 <label className={styles.label} htmlFor="phone-number">
@@ -235,23 +174,11 @@ export function Billing({
                   type="tel"
                   id="phone-number"
                 />
-                {/* {errors.phone && (
-                  <span style={{ color: "red" }}> {errors.phone.message}</span>
-                )} */}
               </div>
             </section>
             <section className={styles.gift_section}>
               <p className={styles.title}>Balenie</p>
-              {/* <form action=""> */}
-              {/* <div>
-                <input
-                  type="radio"
-                  id="free"
-                  {...register("giftPackaging")}
-                  value="free"
-                />
-                <label htmlFor="free"> free </label>
-              </div> */}
+
               <div className={styles.input_container}>
                 <input
                   className={styles.gift_checkbox}
@@ -270,16 +197,7 @@ export function Billing({
                   {formatCurrency(giftPackagingPrice)}
                 </p>
               </div>
-              {/* {errors.giftPackaging && (
-                <span style={{ color: "red" }}>
-                  {" "}
-                  {errors.giftPackaging.message}
-                </span>
-              )} */}
-              {/* </form> */}
             </section>
-
-            {/* </form> */}
 
             <section className={styles.check_section}>
               <div>
