@@ -102,7 +102,7 @@ export function CartSummary(props: Props) {
                     style={{
                       left: `${percentage > 100 ? "95" : percentage - 5}%`,
                     }}
-                    src="/public/truck-icon.svg"
+                    src="/truck-icon.svg"
                     alt=""
                   />
                 </div>
