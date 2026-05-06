@@ -72,7 +72,10 @@ export function CartSummary(props: Props) {
             {props.variant === "mini" ? (
               <div className={styles.mini_version_delivery_limit}>
                 {Number(totalPrice.toFixed(2)) >= freeDeliveryPrice ? (
-                  <p className={styles.secondary_text}>Dopravu máš zdarma</p>
+                  <p className={styles.secondary_text}>
+                    Dopravu máš{" "}
+                    <span style={{ fontWeight: "bold" }}>zdarma</span>
+                  </p>
                 ) : (
                   <p className={styles.secondary_text}>
                     Nakúp ešte za{" "}
@@ -81,7 +84,8 @@ export function CartSummary(props: Props) {
                         freeDeliveryPrice - Number(totalPrice.toFixed(2)),
                       )}
                     </span>{" "}
-                    a využi dopravu zdarma{" "}
+                    a využi dopravu{" "}
+                    <span style={{ fontWeight: "bold" }}>zdarma</span>{" "}
                   </p>
                 )}
 
