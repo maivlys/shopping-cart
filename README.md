@@ -1,73 +1,43 @@
-# React + TypeScript + Vite
+# Shopping Cart – React & TypeScript
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern e-commerce application built with React and TypeScript, focused on realistic shopping cart functionality, scalable frontend architecture, and responsive user experience.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[preview](https://pearla-shopping-cart-project.vercel.app/)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Product catalog with filtering and detailed product pages
+- Shopping cart with persistent local storage state
+- Favourite products system
+- Multi-step checkout flow with Zod validation
+- Responsive design across devices
+- Global state management using Context API
+- End-to-end checkout flow with simulated purchase confirmation
 
-## Expanding the ESLint configuration
+## Skills Demonstrated
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Building reusable and modular React components
+- Type-safe frontend development with TypeScript
+- Managing shared application state with Context API
+- Client-side routing using React Router
+- Form validation using Zod schemas
+- Custom JSON product database designed to simulate API-based data fetching
+- Persistent client-side state using local storage
+- Responsive layouts using CSS Modules, Flexbox, and Grid
+- UI implementation based on custom Figma designs and UX research informed by user interviews conducted as part of a master’s thesis
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Installation
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/maivlys/shopping-cart.git
+cd shopping-cart
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Future Improvements
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Basic user authentication system (login/logout with optional backend integration)
+- Quick buy modal to allow faster product purchase directly from detail page
