@@ -1,6 +1,5 @@
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import styles from "./CartSummary.module.css";
-import data from "../data/data.json";
 import { CartItem } from "./CartItem";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +15,7 @@ type Props =
     };
 
 export function CartSummary(props: Props) {
-  const { cartItems, freeDeliveryPrice } = useShoppingCart();
+  const { cartItems, freeDeliveryPrice, data } = useShoppingCart();
   const navigate = useNavigate();
 
   let totalPrice = cartItems.reduce((total, cartItem) => {

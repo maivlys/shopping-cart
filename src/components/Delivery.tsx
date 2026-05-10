@@ -7,7 +7,6 @@ import { z } from "zod";
 import { useEffect, useState } from "react";
 import { PurchaseConfirmationModal } from "./PurchaseConfirmationModal";
 import { useShoppingCart } from "../context/ShoppingCartContext";
-import data from "../data/data.json";
 
 const schema = z.object({
   country: z.enum(["cz", "sk"]).or(z.literal("")),
@@ -36,9 +35,9 @@ export function Delivery({
   setStep,
   finishProcess,
 }: Props) {
-  const { cartItems } = useShoppingCart();
+  const { cartItems, data } = useShoppingCart();
   const [deliveryTo, setDeliveryTo] = useState<string>("");
-  const [loading, setLoading] = useState(false);
+  const [loadingAnimation, setLoadingAnimation] = useState(false);
 
   let totalPrice = cartItems.reduce((total, cartItem) => {
     const product = data.find((item) => item.id === cartItem.id);
@@ -58,9 +57,9 @@ export function Delivery({
   });
 
   function submitData(data: DeliveryData) {
-    setLoading(true);
+    setLoadingAnimation(true);
     setTimeout(() => {
-      setLoading(false);
+      setLoadingAnimation(false);
     }, 1300);
     onUpdateDelivery(data);
     setStep("purchase");
@@ -324,7 +323,7 @@ export function Delivery({
           {step === "purchase" && (
             <PurchaseConfirmationModal
               finishProcess={finishProcess}
-              loading={loading}
+              loading={loadingAnimation}
               // setLoading={setLoading}
             />
           )}

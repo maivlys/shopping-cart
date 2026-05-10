@@ -1,7 +1,6 @@
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import styles from "./Review.module.css";
 import { formatCurrency } from "../utilities/formatCurrency";
-import data from "../data/data.json";
 
 type Props = {
   giftPackaging?: boolean;
@@ -18,7 +17,7 @@ export function Review({
   selectedDelivery,
   selectedPayment,
 }: Props) {
-  const { cartItems, giftPackagingPrice } = useShoppingCart();
+  const { cartItems, giftPackagingPrice, data } = useShoppingCart();
 
   return (
     <div className={styles.review}>

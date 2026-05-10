@@ -1,10 +1,9 @@
 import styles from "./Favorites.module.css";
-import data from "../data/data.json";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import { StoreProduct } from "../components/StoreProduct";
 
 export function Favorites() {
-  const { favs } = useShoppingCart();
+  const { favs, data } = useShoppingCart();
 
   return (
     <div className={styles.container}>

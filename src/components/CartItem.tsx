@@ -1,4 +1,3 @@
-import data from "../data/data.json";
 import styles from "./CartItem.module.css";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { useShoppingCart } from "../context/ShoppingCartContext";
@@ -11,7 +10,7 @@ type CartItemProps = {
 };
 
 export function CartItem({ id, quantity, variant }: CartItemProps) {
-  const { increaseQnt, decreaseQnt, removeFromCart } = useShoppingCart();
+  const { increaseQnt, decreaseQnt, removeFromCart, data } = useShoppingCart();
   const navigate = useNavigate();
 
   const product = data.find((item) => item.id === id);

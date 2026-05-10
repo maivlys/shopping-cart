@@ -1,4 +1,5 @@
-import data from "../data/data.json";
+import { useShoppingCart } from "../context/ShoppingCartContext";
+
 import styles from "./Store.module.css";
 import { StoreProduct } from "../components/StoreProduct";
 import { useState } from "react";
@@ -6,6 +7,18 @@ import { Filter } from "../components/FIlter";
 import type { Product } from "../types/Product";
 
 export function Store() {
+  const { data, loading } = useShoppingCart();
+
+  if (loading) {
+    return (
+      <>
+        <div className={styles.container}>
+          <p className={styles.message}>Načítavam...</p>
+        </div>
+      </>
+    );
+  }
+
   const [productsToRender, setProductsToRender] = useState<Product[]>(data);
 
   return (

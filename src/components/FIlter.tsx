@@ -1,15 +1,17 @@
 import styles from "./Filter.module.css";
 import { useState, useEffect } from "react";
-import data from "../data/data.json";
 import filter_colors from "../data/filter_colors.json";
 import filter_types from "../data/filter_types.json";
 import type { Product } from "../types/Product";
+import { useShoppingCart } from "../context/ShoppingCartContext";
 
 type Props = {
   setProductsToRender: React.Dispatch<React.SetStateAction<Product[]>>;
 };
 
 export function Filter({ setProductsToRender }: Props) {
+  const { data } = useShoppingCart();
+
   const [activeFilter_price, setActiveFilter_price] = useState<{
     min: number;
     max: number;

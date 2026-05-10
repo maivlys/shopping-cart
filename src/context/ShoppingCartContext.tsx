@@ -1,5 +1,12 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { fetchProducts } from "../api/products.ts";
 
 type ShoppingCartContext = {
   getQnt: (id: number) => number;
@@ -18,6 +25,9 @@ type ShoppingCartContext = {
   giftPackagingPrice: number;
   openCartPreview: boolean;
   setOpenCartPreview: React.Dispatch<React.SetStateAction<boolean>>;
+  data: Product[];
+  loading: boolean;
+  err: string | null;
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -35,7 +45,48 @@ type CartItem = {
   quantity: number;
 };
 
+export type Product = {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  imgUrl: string[];
+  color_filter: string[];
+  type: string[];
+  colorOptions: {
+    color: string;
+    id: number;
+  }[];
+  material: string;
+  length: string;
+};
+
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
+  const [data, setData] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      setLoading(true);
+      try {
+        const fetchedData = await fetchProducts();
+        setData(fetchedData);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setErr(error.message);
+          console.log(error);
+        } else {
+          setErr("Niečo sa pokazilo");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
   const [openCartPreview, setOpenCartPreview] = useState(false); //cart preview on product page
 
   const freeDeliveryPrice = 49;
@@ -130,6 +181,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         giftPackagingPrice,
         openCartPreview,
         setOpenCartPreview,
+        data,
+        loading,
+        err,
       }}
     >
       {children}
