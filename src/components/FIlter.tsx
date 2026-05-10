@@ -25,7 +25,7 @@ export function Filter({ setProductsToRender }: Props) {
     const filteredData = data.filter((item) => {
       const priceMatch =
         activeFilter_price.min < item.price &&
-        activeFilter_price.max > item.price;
+        activeFilter_price.max >= item.price;
       const colorMatch =
         activeFilter_colors.length === 0 ||
         activeFilter_colors.some((c) => item.color_filter.includes(c));
