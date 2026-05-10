@@ -39,5 +39,6 @@ npm run dev
 
 ## Future Improvements
 
+- Expand product dataset and implement pagination 
 - Basic user authentication system (login/logout with optional backend integration)
 - Quick buy modal to allow faster product purchase directly from detail page
