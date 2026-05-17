@@ -7,6 +7,7 @@ import {
 } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { fetchProducts } from "../api/products.ts";
+import type { Product } from "../types/Product";
 
 type ShoppingCartContext = {
   getQnt: (id: number) => number;
@@ -43,22 +44,6 @@ type ShoppingCartProviderProps = {
 type CartItem = {
   id: number;
   quantity: number;
-};
-
-export type Product = {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  imgUrl: string[];
-  color_filter: string[];
-  type: string[];
-  colorOptions: {
-    color: string;
-    id: number;
-  }[];
-  material: string;
-  length: string;
 };
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {

@@ -142,7 +142,7 @@ export function CartSummary(props: Props) {
             props.variant === "mini" ? styles.mini : ""
           }`}
         >
-          <img src="/public/empty_cart.png" alt="empty-cart-illustration" />
+          <img src="/empty_cart.png" alt="empty-cart-illustration" />
           <p className={styles.message}>Tvoj košík je zatiaľ prázdny</p>
         </div>
       )}

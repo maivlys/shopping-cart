@@ -28,11 +28,6 @@ export function Review({
 
           return (
             <div className={styles.product_review}>
-              {/* <img
-                className={styles.img}
-                src={product.imgUrl[0]}
-                alt="product-image"
-              /> */}
               <p className={styles.product_name}>
                 <span className={styles.qnt}> {p.quantity} x </span>
                 {product.name} - {product.description}

@@ -5,22 +5,7 @@ import { formatCurrency } from "../utilities/formatCurrency";
 import { useEffect, useState } from "react";
 import { CartSummary } from "../components/CartSummary";
 import { ImageModal } from "../components/ImageModal";
-
-type Product = {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  imgUrl: string[];
-  color_filter: string[];
-  type: string[];
-  colorOptions: {
-    color: string;
-    id: number;
-  }[];
-  material: string;
-  length: string;
-};
+import type { Product } from "../types/Product";
 
 export function ProductPage() {
   const { openCartPreview, setOpenCartPreview, data } = useShoppingCart();

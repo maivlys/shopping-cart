@@ -1,9 +1,8 @@
 import { useShoppingCart } from "../context/ShoppingCartContext";
-
 import styles from "./Store.module.css";
 import { StoreProduct } from "../components/StoreProduct";
 import { useState } from "react";
-import { Filter } from "../components/FIlter";
+import { Filter } from "../components/Filter";
 import type { Product } from "../types/Product";
 
 export function Store() {
