@@ -39,6 +39,7 @@ npm run dev
 
 ## Future Improvements
 
+- Add frontend testing with Vitest *(currently in progress)*
 - Expand product dataset and implement pagination 
 - Basic user authentication system (login/logout with optional backend integration)
 - Quick buy modal to allow faster product purchase directly from detail page
