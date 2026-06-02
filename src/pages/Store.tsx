@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Filter } from "../components/Filter";
 import type { Product } from "../types/Product";
 
-export function Store() {
+export default function Store() {
   const { data, loading } = useShoppingCart();
 
   if (loading) {

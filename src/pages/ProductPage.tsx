@@ -7,7 +7,7 @@ import { CartSummary } from "../components/CartSummary";
 import { ImageModal } from "../components/ImageModal";
 import type { Product } from "../types/Product";
 
-export function ProductPage() {
+export default function ProductPage() {
   const { openCartPreview, setOpenCartPreview, data } = useShoppingCart();
 
   const location = useLocation();

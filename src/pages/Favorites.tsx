@@ -2,7 +2,7 @@ import styles from "./Favorites.module.css";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import { StoreProduct } from "../components/StoreProduct";
 
-export function Favorites() {
+export default function Favorites() {
   const { favs, data } = useShoppingCart();
 
   return (

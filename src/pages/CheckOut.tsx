@@ -8,7 +8,7 @@ import type { BillingData } from "../components/Billing";
 import { useNavigate } from "react-router-dom";
 import { useShoppingCart } from "../context/ShoppingCartContext";
 
-export function CheckOut() {
+export default function CheckOut() {
   // steps => cart, billing, delivery, purchase
   const { setCartItems } = useShoppingCart();
 
