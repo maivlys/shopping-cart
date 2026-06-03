@@ -7,6 +7,7 @@ import type { Product } from "../types/Product";
 
 export default function Store() {
   const { data, loading } = useShoppingCart();
+  const [productsToRender, setProductsToRender] = useState<Product[]>(data);
 
   if (loading) {
     return (
@@ -17,8 +18,6 @@ export default function Store() {
       </>
     );
   }
-
-  const [productsToRender, setProductsToRender] = useState<Product[]>(data);
 
   return (
     <>
