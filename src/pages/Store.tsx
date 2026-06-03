@@ -1,13 +1,17 @@
 import { useShoppingCart } from "../context/ShoppingCartContext";
 import styles from "./Store.module.css";
 import { StoreProduct } from "../components/StoreProduct";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Filter } from "../components/Filter";
 import type { Product } from "../types/Product";
 
 export default function Store() {
   const { data, loading } = useShoppingCart();
   const [productsToRender, setProductsToRender] = useState<Product[]>(data);
+
+  useEffect(() => {
+    setProductsToRender(data);
+  }, [data]);
 
   if (loading) {
     return (
