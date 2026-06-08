@@ -1,7 +1,7 @@
 import { Navbar } from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import "./App.module.css";
+import "./App.css";
 
 const Store = lazy(() => import("./pages/Store"));
 const ProductPage = lazy(() => import("./pages/ProductPage"));
