@@ -38,6 +38,7 @@ This project was originally built using a single React Context and manual data f
 - Simulating API-based data fetching with a custom JSON product database
 - Responsive layouts using CSS Modules, Flexbox, and CSS Grid
 - UI implementation based on custom Figma designs and UX research conducted as part of a master's thesis
+
 ## Installation
 
 ```bash
@@ -49,7 +50,7 @@ npm run dev
 
 ## Future Improvements
 
-- Add frontend testing with Vitest *(currently in progress)*
-- Expand product dataset and implement pagination 
+- Add frontend testing with Vitest _(currently in progress)_
+- Expand product dataset and implement pagination
 - Basic user authentication system (login/logout with optional backend integration)
 - Quick buy modal to allow faster product purchase directly from detail page
