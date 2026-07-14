@@ -4,7 +4,6 @@ import { formatCurrency } from "../utilities/formatCurrency";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { useCartStore } from "../store/useCartStore";
-import { useShallow } from "zustand/shallow";
 import { useFavoritesStore } from "../store/useFavoritesStore";
 
 type ProductItemProps = {
