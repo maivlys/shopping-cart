@@ -1,6 +1,5 @@
 import { useParams, useNavigate, useLocation } from "react-router";
 import styles from "./ProductPage.module.css";
-// import { useShoppingCart } from "../context/ShoppingCartContext";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { useEffect, useState } from "react";
 import { CartSummary } from "../components/CartSummary";
@@ -11,7 +10,6 @@ import { useCartStore } from "../store/useCartStore";
 import { useFavoritesStore } from "../store/useFavoritesStore";
 
 export default function ProductPage() {
-  // const { openCartPreview, setOpenCartPreview, data } = useShoppingCart();
   const { data: products = [] } = useProducts();
   const { openCartPreview, setOpenCartPreview } = useCartStore();
 
@@ -33,15 +31,6 @@ export default function ProductPage() {
     delivery: false,
     care: false,
   });
-  // const {
-  //   cartItems,
-  //   decreaseQnt,
-  //   increaseQnt,
-  //   isInCart,
-  //   isFav,
-  //   addToFavs,
-  //   removeFromFavs,
-  // } = useShoppingCart();
   const {
     items: cartItems,
     decreaseQnt,

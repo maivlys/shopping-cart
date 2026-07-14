@@ -1,4 +1,3 @@
-// import { useShoppingCart } from "../context/ShoppingCartContext";
 import styles from "./Review.module.css";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { GIFT_PACKAGING_PRICE } from "../config/constants";
@@ -20,7 +19,6 @@ export function Review({
   selectedDelivery,
   selectedPayment,
 }: Props) {
-  // const { cartItems, giftPackagingPrice, data } = useShoppingCart();
   const cartItems = useCartStore((s) => s.items);
   const { data: products = [] } = useProducts();
 

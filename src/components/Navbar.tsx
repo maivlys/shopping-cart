@@ -1,6 +1,5 @@
 import styles from "./Navbar.module.css";
 import { Link } from "react-router";
-// import { useShoppingCart } from "../context/ShoppingCartContext";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { useEffect, useState } from "react";
 import { useCartStore } from "../store/useCartStore";
@@ -8,8 +7,6 @@ import { FREE_DELIVERY_PRICE } from "../config/constants";
 import { useFavoritesStore } from "../store/useFavoritesStore";
 
 export function Navbar() {
-  // const { getTotalQnt, favs, freeDeliveryPrice, setOpenCartPreview } =
-  //   useShoppingCart();
   const { getTotalQnt } = useCartStore();
   const favs = useFavoritesStore((s) => s.favs);
   const setOpenCartPreview = useCartStore((s) => s.setOpenCartPreview);

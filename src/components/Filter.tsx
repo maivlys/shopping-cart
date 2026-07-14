@@ -2,8 +2,6 @@ import styles from "./Filter.module.css";
 import { useState } from "react";
 import filterColors from "../data/filter_colors.json";
 import filterTypes from "../data/filter_types.json";
-// import type { Product } from "../types/Product";
-// import { useShoppingCart } from "../context/ShoppingCartContext";
 import type { FilterState } from "../pages/Store";
 
 type Props = {
@@ -20,49 +18,6 @@ const TYPE_LABELS: Record<string, string> = {
 };
 
 export function Filter({ filters, onFiltersChange, initialFilters }: Props) {
-  // const { data } = useShoppingCart();
-
-  // const [activeFilter_price, setActiveFilter_price] = useState<{
-  //   min: number;
-  //   max: number;
-  // }>({ min: 0, max: Number.MAX_VALUE });
-
-  // const [activeFilter_colors, setActiveFilter_colors] = useState<string[]>([]);
-  // const [activeFilter_types, setActiveFilter_types] = useState<string[]>([]);
-
-  // useEffect(() => {
-  //   const filteredData = data.filter((item) => {
-  //     const priceMatch =
-  //       activeFilter_price.min < item.price &&
-  //       activeFilter_price.max >= item.price;
-  //     const colorMatch =
-  //       activeFilter_colors.length === 0 ||
-  //       activeFilter_colors.some((c) => item.color_filter.includes(c));
-  //     const typeMatch =
-  //       activeFilter_types.length === 0 ||
-  //       activeFilter_types.some((t) => item.type.includes(t));
-  //     return priceMatch && colorMatch && typeMatch;
-  //   });
-  //   setProductsToRender(filteredData);
-  // }, [activeFilter_colors, activeFilter_types, activeFilter_price]);
-
-  // function applyPriceFilter() {
-  //   setActiveFilter_price({
-  //     min: Number(priceInput.min) || 0,
-  //     max: Number(priceInput.max) || Number.MAX_VALUE,
-  //   });
-  // }
-
-  // function cancelFilter() {
-  //   setActiveFilter_price({ min: 0, max: Number.MAX_VALUE });
-  //   setPriceInput({
-  //     min: "",
-  //     max: "",
-  //   });
-  //   setActiveFilter_colors([]);
-  //   setActiveFilter_types([]);
-  // }
-
   const [priceInput, setPriceInput] = useState<{ min: string; max: string }>({
     min: "",
     max: "",

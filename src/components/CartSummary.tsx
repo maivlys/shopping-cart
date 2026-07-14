@@ -1,4 +1,3 @@
-// import { useShoppingCart } from "../context/ShoppingCartContext";
 import styles from "./CartSummary.module.css";
 import { CartItem } from "./CartItem";
 import { formatCurrency } from "../utilities/formatCurrency";
@@ -18,8 +17,6 @@ type Props =
     };
 
 export function CartSummary(props: Props) {
-  // const { cartItems, freeDeliveryPrice, data } = useShoppingCart();
-  // const { items: cartItems } = useCartStore();
   const cartItems = useCartStore((s) => s.items);
   const { data: products = [] } = useProducts();
   const navigate = useNavigate();

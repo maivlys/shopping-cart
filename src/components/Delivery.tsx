@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useEffect, useState } from "react";
 import { PurchaseConfirmationModal } from "./PurchaseConfirmationModal";
-// import { useShoppingCart } from "../context/ShoppingCartContext";
 import { useCartStore } from "../store/useCartStore";
 import { useProducts } from "../hooks/useProducts";
 
@@ -37,7 +36,6 @@ export function Delivery({
   setStep,
   finishProcess,
 }: Props) {
-  // const { cartItems, data } = useShoppingCart();
   const cartItems = useCartStore((s) => s.items);
   const { data: products = [] } = useProducts();
   const [deliveryTo, setDeliveryTo] = useState<string>("");
@@ -328,7 +326,6 @@ export function Delivery({
             <PurchaseConfirmationModal
               finishProcess={finishProcess}
               loading={loadingAnimation}
-              // setLoading={setLoading}
             />
           )}
         </div>

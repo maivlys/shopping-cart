@@ -1,4 +1,3 @@
-// import { useShoppingCart } from "../context/ShoppingCartContext";
 import styles from "./Billing.module.css";
 import { Review } from "./Review";
 import { formatCurrency } from "../utilities/formatCurrency";
@@ -56,8 +55,6 @@ type Props = {
 };
 
 export function Billing({ defaultValues, onUpdateBilling, setStep }: Props) {
-  // const { giftPackagingPrice } = useShoppingCart();
-
   const termsRef = useRef<HTMLInputElement>(null);
   const [termsError, setTermsError] = useState(false);
 

@@ -1,11 +1,9 @@
 import styles from "./Favorites.module.css";
-// import { useShoppingCart } from "../context/ShoppingCartContext";
 import { StoreProduct } from "../components/StoreProduct";
 import { useFavoritesStore } from "../store/useFavoritesStore";
 import { useProducts } from "../hooks/useProducts";
 
 export default function Favorites() {
-  // const { favs, data } = useShoppingCart();
   const favs = useFavoritesStore((s) => s.favs);
   const { data: products = [] } = useProducts();
 
