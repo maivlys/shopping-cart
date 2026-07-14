@@ -1,14 +1,19 @@
 import { useParams, useNavigate, useLocation } from "react-router";
 import styles from "./ProductPage.module.css";
-import { useShoppingCart } from "../context/ShoppingCartContext";
+// import { useShoppingCart } from "../context/ShoppingCartContext";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { useEffect, useState } from "react";
 import { CartSummary } from "../components/CartSummary";
 import { ImageModal } from "../components/ImageModal";
 import type { Product } from "../types/Product";
+import { useProducts } from "../hooks/useProducts";
+import { useCartStore } from "../store/useCartStore";
+import { useFavoritesStore } from "../store/useFavoritesStore";
 
 export default function ProductPage() {
-  const { openCartPreview, setOpenCartPreview, data } = useShoppingCart();
+  // const { openCartPreview, setOpenCartPreview, data } = useShoppingCart();
+  const { data: products = [] } = useProducts();
+  const { openCartPreview, setOpenCartPreview } = useCartStore();
 
   const location = useLocation();
   useEffect(() => {
@@ -28,18 +33,27 @@ export default function ProductPage() {
     delivery: false,
     care: false,
   });
+  // const {
+  //   cartItems,
+  //   decreaseQnt,
+  //   increaseQnt,
+  //   isInCart,
+  //   isFav,
+  //   addToFavs,
+  //   removeFromFavs,
+  // } = useShoppingCart();
   const {
-    cartItems,
+    items: cartItems,
     decreaseQnt,
     increaseQnt,
     isInCart,
-    isFav,
-    addToFavs,
-    removeFromFavs,
-  } = useShoppingCart();
+  } = useCartStore();
+  const { isFav, addToFavs, removeFromFavs } = useFavoritesStore();
 
   const { id } = useParams();
-  const product = (data as Product[]).find((item) => item.id === Number(id));
+  const product = (products as Product[]).find(
+    (item) => item.id === Number(id),
+  );
   if (!product) return <div>product not found</div>;
   const productQntInCart = cartItems.find(
     (item) => item.id === product.id,
@@ -80,6 +94,7 @@ export default function ProductPage() {
               }
               return (
                 <img
+                  key={i}
                   onClick={() => openModal(product.imgUrl, i)}
                   className={styles.img_small}
                   src={product.imgUrl[i]}
@@ -117,6 +132,7 @@ export default function ProductPage() {
                 }
                 return (
                   <img
+                    key={i}
                     onClick={() => openModal(product.imgUrl, i)}
                     className={styles.img_small}
                     src={product.imgUrl[i]}

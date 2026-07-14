@@ -1,6 +1,9 @@
-import { useShoppingCart } from "../context/ShoppingCartContext";
+// import { useShoppingCart } from "../context/ShoppingCartContext";
 import styles from "./Review.module.css";
 import { formatCurrency } from "../utilities/formatCurrency";
+import { GIFT_PACKAGING_PRICE } from "../config/constants";
+import { useCartStore } from "../store/useCartStore";
+import { useProducts } from "../hooks/useProducts";
 
 type Props = {
   giftPackaging?: boolean;
@@ -17,13 +20,15 @@ export function Review({
   selectedDelivery,
   selectedPayment,
 }: Props) {
-  const { cartItems, giftPackagingPrice, data } = useShoppingCart();
+  // const { cartItems, giftPackagingPrice, data } = useShoppingCart();
+  const cartItems = useCartStore((s) => s.items);
+  const { data: products = [] } = useProducts();
 
   return (
     <div className={styles.review}>
       <section className={styles.cart_summary}>
         {cartItems.map((p) => {
-          const product = data.find((item) => item.id === p.id);
+          const product = products.find((item) => item.id === p.id);
           if (!product) return null;
 
           return (
@@ -105,7 +110,7 @@ export function Review({
               <>
                 <p>Darčekové</p>
                 <p className={styles.summary_section_price}>
-                  {formatCurrency(giftPackagingPrice)}
+                  {formatCurrency(GIFT_PACKAGING_PRICE)}
                 </p>
               </>
             ) : (
@@ -122,7 +127,7 @@ export function Review({
           <p
             className={`${styles.secondary_text} ${styles.gift} ${giftPackaging && styles.active}`}
           >
-            + Darčekové balenie {formatCurrency(giftPackagingPrice)}
+            + Darčekové balenie {formatCurrency(GIFT_PACKAGING_PRICE)}
           </p>
         )}
       </div>
@@ -131,10 +136,10 @@ export function Review({
         <p className={styles.total_price}>
           {formatCurrency(
             cartItems.reduce((total, cartItem) => {
-              const product = data.find((item) => item.id === cartItem.id);
+              const product = products.find((item) => item.id === cartItem.id);
               return total + (product?.price || 0) * cartItem.quantity;
             }, 0) +
-              (giftPackaging ? giftPackagingPrice : 0) +
+              (giftPackaging ? GIFT_PACKAGING_PRICE : 0) +
               (deliveryPrice ? deliveryPrice().value : 0),
           )}{" "}
         </p>

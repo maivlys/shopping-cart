@@ -1,8 +1,11 @@
 import styles from "./StoreProduct.module.css";
 import { formatCurrency } from "../utilities/formatCurrency";
-import { useShoppingCart } from "../context/ShoppingCartContext";
+// import { useShoppingCart } from "../context/ShoppingCartContext";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { useCartStore } from "../store/useCartStore";
+import { useShallow } from "zustand/shallow";
+import { useFavoritesStore } from "../store/useFavoritesStore";
 
 type ProductItemProps = {
   product: {
@@ -22,15 +25,21 @@ type ProductItemProps = {
 };
 
 export function StoreProduct({ product, page }: ProductItemProps) {
-  const {
-    increaseQnt,
-    decreaseQnt,
-    isInCart,
-    isFav,
-    addToFavs,
-    removeFromFavs,
-    cartItems,
-  } = useShoppingCart();
+  // const {
+  //   increaseQnt,
+  //   decreaseQnt,
+  //   isInCart,
+  //   isFav,
+  //   addToFavs,
+  //   removeFromFavs,
+  //   cartItems,
+  // } = useShoppingCart();
+  const { increaseQnt, decreaseQnt, isInCart } = useCartStore();
+
+  const { isFav, addToFavs, removeFromFavs } = useFavoritesStore();
+
+  const cartItems = useCartStore((s) => s.items);
+
   const navigate = useNavigate();
 
   const [addedInfo, setAddedInfo] = useState<boolean>(false);

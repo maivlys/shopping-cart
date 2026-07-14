@@ -1,4 +1,4 @@
-import { useShoppingCart } from "../context/ShoppingCartContext";
+// import { useShoppingCart } from "../context/ShoppingCartContext";
 import styles from "./Billing.module.css";
 import { Review } from "./Review";
 import { formatCurrency } from "../utilities/formatCurrency";
@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useEffect, useRef, useState } from "react";
+import { GIFT_PACKAGING_PRICE } from "../config/constants";
 
 const schema = z.object({
   firstName: z
@@ -55,7 +56,7 @@ type Props = {
 };
 
 export function Billing({ defaultValues, onUpdateBilling, setStep }: Props) {
-  const { giftPackagingPrice } = useShoppingCart();
+  // const { giftPackagingPrice } = useShoppingCart();
 
   const termsRef = useRef<HTMLInputElement>(null);
   const [termsError, setTermsError] = useState(false);
@@ -97,25 +98,25 @@ export function Billing({ defaultValues, onUpdateBilling, setStep }: Props) {
             <section className={styles.form_section}>
               <p className={styles.title}>Dodacie a fakturačné údaje</p>
               <div className={styles.input_group}>
-                <label className={styles.label} htmlFor="name">
+                <label className={styles.label} htmlFor="firstName">
                   Meno<span className={styles.star}>*</span>
                 </label>
                 <input
                   className={`${styles.input} ${errors.firstName ? styles.empty : null}`}
                   {...register("firstName")}
                   type="text"
-                  id="name"
+                  id="firstName"
                 />
               </div>
               <div className={styles.input_group}>
-                <label className={styles.label} htmlFor="name">
+                <label className={styles.label} htmlFor="lastName">
                   Priezvisko<span className={styles.star}>*</span>
                 </label>
                 <input
                   className={`${styles.input} ${errors.lastName ? styles.empty : null}`}
                   {...register("lastName")}
                   type="text"
-                  id="name"
+                  id="lastName"
                 />
               </div>
               <div className={styles.input_group}>
@@ -194,7 +195,7 @@ export function Billing({ defaultValues, onUpdateBilling, setStep }: Props) {
                   Darčekové balenie{" "}
                 </label>
                 <p className={styles.gift_price}>
-                  {formatCurrency(giftPackagingPrice)}
+                  {formatCurrency(GIFT_PACKAGING_PRICE)}
                 </p>
               </div>
             </section>

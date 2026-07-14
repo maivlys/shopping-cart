@@ -1,12 +1,18 @@
 import styles from "./Navbar.module.css";
 import { Link } from "react-router";
-import { useShoppingCart } from "../context/ShoppingCartContext";
+// import { useShoppingCart } from "../context/ShoppingCartContext";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { useEffect, useState } from "react";
+import { useCartStore } from "../store/useCartStore";
+import { FREE_DELIVERY_PRICE } from "../config/constants";
+import { useFavoritesStore } from "../store/useFavoritesStore";
 
 export function Navbar() {
-  const { getTotalQnt, favs, freeDeliveryPrice, setOpenCartPreview } =
-    useShoppingCart();
+  // const { getTotalQnt, favs, freeDeliveryPrice, setOpenCartPreview } =
+  //   useShoppingCart();
+  const { getTotalQnt } = useCartStore();
+  const favs = useFavoritesStore((s) => s.favs);
+  const setOpenCartPreview = useCartStore((s) => s.setOpenCartPreview);
 
   function useMaxWidth(maxWidth: number) {
     const [matches, setMatches] = useState(
@@ -30,7 +36,9 @@ export function Navbar() {
   return (
     <div className={styles.container}>
       <div className={styles.delivery_info}>
-        <p>Doprava zdarma pri nákupe nad {formatCurrency(freeDeliveryPrice)}</p>
+        <p>
+          Doprava zdarma pri nákupe nad {formatCurrency(FREE_DELIVERY_PRICE)}
+        </p>
       </div>
       <ul className={styles.ul}>
         <div className={`${styles.logo} ${styles.mobile}`}>

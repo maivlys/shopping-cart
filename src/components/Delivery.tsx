@@ -6,7 +6,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useEffect, useState } from "react";
 import { PurchaseConfirmationModal } from "./PurchaseConfirmationModal";
-import { useShoppingCart } from "../context/ShoppingCartContext";
+// import { useShoppingCart } from "../context/ShoppingCartContext";
+import { useCartStore } from "../store/useCartStore";
+import { useProducts } from "../hooks/useProducts";
 
 const schema = z.object({
   country: z.enum(["cz", "sk"]).or(z.literal("")),
@@ -35,12 +37,14 @@ export function Delivery({
   setStep,
   finishProcess,
 }: Props) {
-  const { cartItems, data } = useShoppingCart();
+  // const { cartItems, data } = useShoppingCart();
+  const cartItems = useCartStore((s) => s.items);
+  const { data: products = [] } = useProducts();
   const [deliveryTo, setDeliveryTo] = useState<string>("");
   const [loadingAnimation, setLoadingAnimation] = useState(false);
 
   let totalPrice = cartItems.reduce((total, cartItem) => {
-    const product = data.find((item) => item.id === cartItem.id);
+    const product = products.find((item) => item.id === cartItem.id);
     return total + (product?.price || 0) * cartItem.quantity;
   }, 0);
 

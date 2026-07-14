@@ -1,7 +1,10 @@
 import styles from "./CartItem.module.css";
 import { formatCurrency } from "../utilities/formatCurrency";
-import { useShoppingCart } from "../context/ShoppingCartContext";
+// import { useShoppingCart } from "../context/ShoppingCartContext";
 import { useNavigate } from "react-router-dom";
+import { useCartStore } from "../store/useCartStore";
+import { useProducts } from "../hooks/useProducts";
+import { useShallow } from "zustand/shallow";
 
 type CartItemProps = {
   id: number;
@@ -10,10 +13,18 @@ type CartItemProps = {
 };
 
 export function CartItem({ id, quantity, variant }: CartItemProps) {
-  const { increaseQnt, decreaseQnt, removeFromCart, data } = useShoppingCart();
+  // const { increaseQnt, decreaseQnt, removeFromCart, data } = useShoppingCart();
+  const { increaseQnt, decreaseQnt, removeFromCart } = useCartStore(
+    useShallow((s) => ({
+      increaseQnt: s.increaseQnt,
+      decreaseQnt: s.decreaseQnt,
+      removeFromCart: s.removeFromCart,
+    })),
+  );
+  const { data: products = [] } = useProducts();
   const navigate = useNavigate();
 
-  const product = data.find((item) => item.id === id);
+  const product = products.find((item) => item.id === id);
   if (!product) return null; //in case of undefined
 
   const selectedColor = () => {

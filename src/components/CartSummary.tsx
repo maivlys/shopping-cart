@@ -1,8 +1,11 @@
-import { useShoppingCart } from "../context/ShoppingCartContext";
+// import { useShoppingCart } from "../context/ShoppingCartContext";
 import styles from "./CartSummary.module.css";
 import { CartItem } from "./CartItem";
 import { formatCurrency } from "../utilities/formatCurrency";
 import { useNavigate } from "react-router-dom";
+import { FREE_DELIVERY_PRICE } from "../config/constants";
+import { useProducts } from "../hooks/useProducts";
+import { useCartStore } from "../store/useCartStore";
 
 type Props =
   | {
@@ -15,15 +18,18 @@ type Props =
     };
 
 export function CartSummary(props: Props) {
-  const { cartItems, freeDeliveryPrice, data } = useShoppingCart();
+  // const { cartItems, freeDeliveryPrice, data } = useShoppingCart();
+  // const { items: cartItems } = useCartStore();
+  const cartItems = useCartStore((s) => s.items);
+  const { data: products = [] } = useProducts();
   const navigate = useNavigate();
 
   let totalPrice = cartItems.reduce((total, cartItem) => {
-    const product = data.find((item) => item.id === cartItem.id);
+    const product = products.find((item) => item.id === cartItem.id);
     return total + (product?.price || 0) * cartItem.quantity;
   }, 0);
 
-  const percentage = (totalPrice / freeDeliveryPrice) * 100;
+  const percentage = (totalPrice / FREE_DELIVERY_PRICE) * 100;
 
   return (
     <>
@@ -59,7 +65,7 @@ export function CartSummary(props: Props) {
               <p className={styles.total_price}>
                 {formatCurrency(
                   cartItems.reduce((total, cartItem) => {
-                    const product = data.find(
+                    const product = products.find(
                       (item) => item.id === cartItem.id,
                     );
                     return total + (product?.price || 0) * cartItem.quantity;
@@ -70,7 +76,7 @@ export function CartSummary(props: Props) {
 
             {props.variant === "mini" ? (
               <div className={styles.mini_version_delivery_limit}>
-                {Number(totalPrice.toFixed(2)) >= freeDeliveryPrice ? (
+                {Number(totalPrice.toFixed(2)) >= FREE_DELIVERY_PRICE ? (
                   <p className={styles.secondary_text}>
                     Dopravu máš{" "}
                     <span style={{ fontWeight: "bold" }}>zdarma</span>
@@ -80,7 +86,7 @@ export function CartSummary(props: Props) {
                     Nakúp ešte za{" "}
                     <span className={styles.price}>
                       {formatCurrency(
-                        freeDeliveryPrice - Number(totalPrice.toFixed(2)),
+                        FREE_DELIVERY_PRICE - Number(totalPrice.toFixed(2)),
                       )}
                     </span>{" "}
                     a využi dopravu{" "}

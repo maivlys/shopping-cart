@@ -6,11 +6,13 @@ import { Delivery } from "../components/Delivery";
 import type { DeliveryData } from "../components/Delivery";
 import type { BillingData } from "../components/Billing";
 import { useNavigate } from "react-router-dom";
-import { useShoppingCart } from "../context/ShoppingCartContext";
+import { useCartStore } from "../store/useCartStore";
+// import { useShoppingCart } from "../context/ShoppingCartContext";
 
 export default function CheckOut() {
   // steps => cart, billing, delivery, purchase
-  const { setCartItems } = useShoppingCart();
+  // const { setCartItems } = useShoppingCart();
+  const clearCart = useCartStore((s) => s.clearCart);
 
   const [step, setStep] = useState<string>("cart");
   const navigate = useNavigate();
@@ -43,7 +45,7 @@ export default function CheckOut() {
   function finishProcess() {
     navigate("/");
     setFormData(INITIAL_DATA);
-    setCartItems([]);
+    clearCart();
     setStep("cart");
   }
 
